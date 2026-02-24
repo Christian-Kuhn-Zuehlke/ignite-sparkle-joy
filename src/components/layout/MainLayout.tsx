@@ -24,7 +24,7 @@ export function MainLayout({ children, title, subtitle }: MainLayoutProps) {
   return (
     <div className="flex h-screen overflow-hidden bg-background">
       {/* Desktop Sidebar - hidden on mobile via CSS */}
-      <div className="hidden md:block">
+      <div className="hidden md:flex md:shrink-0">
         <Sidebar />
       </div>
       
