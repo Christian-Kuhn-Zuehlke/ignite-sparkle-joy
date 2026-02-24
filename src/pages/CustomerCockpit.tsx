@@ -90,8 +90,8 @@ export default function CustomerCockpit() {
     queryFn: async () => {
       let query = supabase
         .from('orders')
-        .select('customer_no, order_amount, ship_to_name, order_date')
-        .not('customer_no', 'is', null)
+        .select('customer_name, order_amount, ship_to_name, order_date')
+        .not('customer_name', 'is', null)
         .order('order_date', { ascending: false });
 
       // Only filter by company if a specific company is selected
@@ -106,15 +106,15 @@ export default function CustomerCockpit() {
       // Group by customer
       const customerMap: Record<string, { orders: number; revenue: number; name: string; lastOrder: string }> = {};
       
-      for (const order of orders || []) {
-        if (!order.customer_no) continue;
-        if (!customerMap[order.customer_no]) {
-          customerMap[order.customer_no] = { orders: 0, revenue: 0, name: order.ship_to_name, lastOrder: order.order_date };
+      for (const order of (orders || []) as any[]) {
+        if (!order.customer_name) continue;
+        if (!customerMap[order.customer_name]) {
+          customerMap[order.customer_name] = { orders: 0, revenue: 0, name: order.ship_to_name || order.customer_name, lastOrder: order.order_date };
         }
-        customerMap[order.customer_no].orders++;
-        customerMap[order.customer_no].revenue += order.order_amount || 0;
-        if (order.order_date > customerMap[order.customer_no].lastOrder) {
-          customerMap[order.customer_no].lastOrder = order.order_date;
+        customerMap[order.customer_name].orders++;
+        customerMap[order.customer_name].revenue += order.order_amount || 0;
+        if (order.order_date > customerMap[order.customer_name].lastOrder) {
+          customerMap[order.customer_name].lastOrder = order.order_date;
         }
       }
 
@@ -167,8 +167,8 @@ export default function CustomerCockpit() {
     queryFn: async () => {
       let query = supabase
         .from('orders')
-        .select('customer_no, order_amount, ship_to_name, order_date')
-        .not('customer_no', 'is', null);
+        .select('customer_name, order_amount, ship_to_name, order_date')
+        .not('customer_name', 'is', null);
 
       if (shouldFilterByCompany) {
         query = query.eq('company_id', companyId);
@@ -181,22 +181,22 @@ export default function CustomerCockpit() {
       // Group by customer
       const customerMap: Record<string, VIPCustomer> = {};
       
-      for (const order of orders || []) {
-        if (!order.customer_no) continue;
-        if (!customerMap[order.customer_no]) {
-          customerMap[order.customer_no] = {
-            customerNo: order.customer_no,
+      for (const order of (orders || []) as any[]) {
+        if (!order.customer_name) continue;
+        if (!customerMap[order.customer_name]) {
+          customerMap[order.customer_name] = {
+            customerNo: order.customer_name,
             orderCount: 0,
             totalRevenue: 0,
             avgOrderValue: 0,
             lastOrderDate: order.order_date,
-            shipToName: order.ship_to_name
+            shipToName: order.ship_to_name || order.customer_name
           };
         }
-        customerMap[order.customer_no].orderCount++;
-        customerMap[order.customer_no].totalRevenue += order.order_amount || 0;
-        if (order.order_date > customerMap[order.customer_no].lastOrderDate) {
-          customerMap[order.customer_no].lastOrderDate = order.order_date;
+        customerMap[order.customer_name].orderCount++;
+        customerMap[order.customer_name].totalRevenue += order.order_amount || 0;
+        if (order.order_date > customerMap[order.customer_name].lastOrderDate) {
+          customerMap[order.customer_name].lastOrderDate = order.order_date;
         }
       }
 
@@ -221,8 +221,8 @@ export default function CustomerCockpit() {
     queryFn: async () => {
       let query = supabase
         .from('orders')
-        .select('customer_no, ship_to_name, order_date')
-        .not('customer_no', 'is', null);
+        .select('customer_name, ship_to_name, order_date')
+        .not('customer_name', 'is', null);
 
       if (shouldFilterByCompany) {
         query = query.eq('company_id', companyId);
@@ -235,12 +235,12 @@ export default function CustomerCockpit() {
       // Group by customer
       const customerMap: Record<string, { name: string; orders: string[] }> = {};
       
-      for (const order of orders || []) {
-        if (!order.customer_no) continue;
-        if (!customerMap[order.customer_no]) {
-          customerMap[order.customer_no] = { name: order.ship_to_name, orders: [] };
+      for (const order of (orders || []) as any[]) {
+        if (!order.customer_name) continue;
+        if (!customerMap[order.customer_name]) {
+          customerMap[order.customer_name] = { name: order.ship_to_name || order.customer_name, orders: [] };
         }
-        customerMap[order.customer_no].orders.push(order.order_date);
+        customerMap[order.customer_name].orders.push(order.order_date);
       }
 
       const now = new Date();

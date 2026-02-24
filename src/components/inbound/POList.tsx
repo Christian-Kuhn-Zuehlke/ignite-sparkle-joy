@@ -130,7 +130,7 @@ export function POList() {
                     </TableCell>
                     <TableCell>{po.supplier_name}</TableCell>
                     <TableCell>
-                      {po.eta ? format(new Date(po.eta), 'dd.MM.yyyy') : '-'}
+                      {po.expected_date ? format(new Date(po.expected_date), 'dd.MM.yyyy') : '-'}
                     </TableCell>
                     <TableCell>
                       <Badge className={STATUS_COLORS[po.status] || 'bg-muted'}>

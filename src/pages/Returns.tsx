@@ -36,9 +36,9 @@ export default function Returns() {
   // Status filters with translation keys
   const STATUS_FILTERS: { value: StatusFilterOption; labelKey: string; statuses: ReturnStatus[] | null }[] = [
     { value: 'all', labelKey: 'common.all', statuses: null },
-    { value: 'open', labelKey: 'returns.open', statuses: ['initiated', 'in_transit', 'received'] },
-    { value: 'processing', labelKey: 'returns.processing', statuses: ['processing'] },
-    { value: 'completed', labelKey: 'returns.completed', statuses: ['completed'] },
+    { value: 'open', labelKey: 'returns.open', statuses: ['announced', 'received', 'inspected'] as ReturnStatus[] },
+    { value: 'processing', labelKey: 'returns.processing', statuses: ['approved', 'rejected'] as ReturnStatus[] },
+    { value: 'completed', labelKey: 'returns.completed', statuses: ['completed', 'restocked', 'disposed'] as ReturnStatus[] },
   ];
   
   // Export permission - only Admin and above
@@ -105,9 +105,9 @@ export default function Returns() {
   });
 
   // Calculate counts from current page data
-  const openCount = returns.filter(r => ['initiated', 'in_transit', 'received'].includes(r.status)).length;
-  const processingCount = returns.filter(r => r.status === 'processing').length;
-  const completedCount = returns.filter(r => r.status === 'completed').length;
+  const openCount = returns.filter(r => ['announced', 'received', 'inspected'].includes(r.status)).length;
+  const processingCount = returns.filter(r => ['approved', 'rejected'].includes(r.status)).length;
+  const completedCount = returns.filter(r => ['completed', 'restocked', 'disposed'].includes(r.status)).length;
 
   const hasActiveFilters = search !== '' || activeFilter !== 'all';
 

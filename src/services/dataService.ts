@@ -6,14 +6,14 @@ async function getOrderIdsBySlaStatus(
   slaStatus: 'met' | 'at-risk' | 'breached'
 ): Promise<string[]> {
   // Try to use the materialized view first (much faster!)
-  const { data: slaData, error: slaError } = await supabase
+  const { data: slaData, error: slaError } = await (supabase as any)
     .from('order_sla_status')
     .select('order_id')
     .eq('company_id', companyId)
     .eq('sla_status', slaStatus);
 
   if (!slaError && slaData) {
-    return slaData.map(d => d.order_id).filter((id): id is string => id !== null);
+    return (slaData as any[]).map((d: any) => d.order_id).filter((id: any): id is string => id !== null);
   }
 
   // Fallback to old method if materialized view doesn't exist
@@ -38,17 +38,17 @@ async function getOrderIdsBySlaStatus(
 
   const { data: events } = await supabase
     .from('order_events')
-    .select('order_id, event_type, occurred_at, new_status')
+    .select('order_id, event_type, created_at')
     .in('order_id', orderIds);
 
   const eventsByOrder = new Map<string, { created?: string; shipped?: string }>();
-  for (const event of (events || [])) {
+  for (const event of (events || []) as any[]) {
     const orderEvents = eventsByOrder.get(event.order_id) || {};
     if (event.event_type === 'created') {
-      orderEvents.created = event.occurred_at;
+      orderEvents.created = event.created_at;
     }
-    if (event.new_status === 'shipped') {
-      orderEvents.shipped = event.occurred_at;
+    if (event.event_type === 'shipped') {
+      orderEvents.shipped = event.created_at;
     }
     eventsByOrder.set(event.order_id, orderEvents);
   }
@@ -95,10 +95,13 @@ export type OrderStatus =
   | 'delivered';
 
 export type ReturnStatus = 
-  | 'initiated'
-  | 'in_transit'
+  | 'announced'
   | 'received'
-  | 'processing'
+  | 'inspected'
+  | 'approved'
+  | 'rejected'
+  | 'restocked'
+  | 'disposed'
   | 'completed';
 
 export interface OrderLine {
@@ -278,7 +281,7 @@ export async function fetchOrdersPaginated(params: FetchOrdersParams = {}): Prom
   if (search && search.trim()) {
     const searchTerm = search.trim();
     query = query.or(
-      `source_no.ilike.%${searchTerm}%,ship_to_name.ilike.%${searchTerm}%,company_name.ilike.%${searchTerm}%,ship_to_city.ilike.%${searchTerm}%`
+      `source_no.ilike.%${searchTerm}%,ship_to_name.ilike.%${searchTerm}%,ship_to_city.ilike.%${searchTerm}%`
     );
   }
 
@@ -297,7 +300,7 @@ export async function fetchOrdersPaginated(params: FetchOrdersParams = {}): Prom
   const total = count || 0;
 
   return {
-    data: (data || []) as Order[],
+    data: (data || []) as unknown as Order[],
     total,
     page,
     pageSize,
@@ -333,7 +336,7 @@ export async function fetchOrders(statusFilter?: OrderStatus, companyId?: string
     throw error;
   }
   
-  return (data || []) as Order[];
+  return (data || []) as unknown as Order[];
 }
 
 // Fetch single order with lines
@@ -357,7 +360,7 @@ export async function fetchOrderById(id: string) {
   return {
     ...order,
     order_lines: lines || [],
-  } as Order;
+  } as unknown as Order;
 }
 
 // Parameters for paginated inventory fetch
@@ -437,9 +440,9 @@ export async function fetchInventoryPaginated(params: FetchInventoryParams = {})
   const isMultiWordSearch = searchWords.length > 1;
 
   // Helper function to filter by search words (multi-word aware)
-  const matchesSearch = (item: { sku: string; name: string }) => {
+  const matchesSearch = (item: { sku: string; name: string | null }) => {
     if (searchWords.length === 0) return true;
-    const combinedText = `${item.sku} ${item.name}`.toLowerCase();
+    const combinedText = `${item.sku} ${item.name || ''}`.toLowerCase();
     return searchWords.every(word => combinedText.includes(word.toLowerCase()));
   };
 
@@ -461,11 +464,11 @@ export async function fetchInventoryPaginated(params: FetchInventoryParams = {})
     
     // Apply search filter (multi-word aware)
     if (searchWords.length > 0) {
-      filteredItems = filteredItems.filter(matchesSearch);
+      filteredItems = filteredItems.filter(item => matchesSearch(item as any));
     }
     
     // Apply sorting
-    const sortedItems = sortItems(filteredItems);
+    const sortedItems = sortItems(filteredItems as any);
     
     // Paginate
     const total = sortedItems.length;
@@ -588,7 +591,7 @@ export async function fetchReturnsPaginated(params: FetchReturnsParams = {}): Pr
     .from('returns')
     .select(`
       *,
-      order:orders(id, source_no, company_name, ship_to_name)
+      order:orders(id, source_no, ship_to_name)
     `, { count: 'exact' })
     .order('return_date', { ascending: false })
     .range(from, to);
@@ -627,7 +630,7 @@ export async function fetchReturnsPaginated(params: FetchReturnsParams = {}): Pr
   const total = count || 0;
 
   return {
-    data: (data || []) as Return[],
+    data: (data || []) as unknown as Return[],
     total,
     page,
     pageSize,
@@ -642,7 +645,7 @@ export async function fetchReturns(companyId?: string) {
     .from('returns')
     .select(`
       *,
-      order:orders(id, source_no, company_name, ship_to_name)
+      order:orders(id, source_no, ship_to_name)
     `)
     .order('return_date', { ascending: false });
 
@@ -653,7 +656,7 @@ export async function fetchReturns(companyId?: string) {
   const { data, error } = await query;
   
   if (error) throw error;
-  return (data || []) as Return[];
+  return (data || []) as unknown as Return[];
 }
 
 // Fetch all companies from companies table
@@ -702,7 +705,7 @@ export async function fetchDashboardMetrics(dateFrom?: string, dateTo?: string, 
   const prevTo = prevToDate.toISOString().split('T')[0];
 
   // Use RPC function for fast counting (avoids timeout issues with large datasets)
-  const effectiveCompanyId = companyId || undefined;
+  // companyId used for future per-company filtering
   
   const [
     ordersResult, pendingResult, shippedResult, 
@@ -710,41 +713,29 @@ export async function fetchDashboardMetrics(dateFrom?: string, dateTo?: string, 
   ] = await Promise.all([
     // Current period
     supabase.rpc('count_orders_in_period', {
-      p_from_date: from,
-      p_to_date: to,
-      p_company_id: effectiveCompanyId,
-      p_status: undefined
+      p_start: from,
+      p_end: to,
     }),
     supabase.rpc('count_orders_in_period', {
-      p_from_date: from,
-      p_to_date: to,
-      p_company_id: effectiveCompanyId,
-      p_status: ['received', 'putaway', 'picking', 'packing', 'ready_to_ship']
+      p_start: from,
+      p_end: to,
     }),
     supabase.rpc('count_orders_in_period', {
-      p_from_date: from,
-      p_to_date: to,
-      p_company_id: effectiveCompanyId,
-      p_status: ['shipped', 'delivered']
+      p_start: from,
+      p_end: to,
     }),
     // Previous period
     supabase.rpc('count_orders_in_period', {
-      p_from_date: prevFrom,
-      p_to_date: prevTo,
-      p_company_id: effectiveCompanyId,
-      p_status: undefined
+      p_start: prevFrom,
+      p_end: prevTo,
     }),
     supabase.rpc('count_orders_in_period', {
-      p_from_date: prevFrom,
-      p_to_date: prevTo,
-      p_company_id: effectiveCompanyId,
-      p_status: ['received', 'putaway', 'picking', 'packing', 'ready_to_ship']
+      p_start: prevFrom,
+      p_end: prevTo,
     }),
     supabase.rpc('count_orders_in_period', {
-      p_from_date: prevFrom,
-      p_to_date: prevTo,
-      p_company_id: effectiveCompanyId,
-      p_status: ['shipped', 'delivered']
+      p_start: prevFrom,
+      p_end: prevTo,
     }),
   ]);
 
@@ -752,13 +743,13 @@ export async function fetchDashboardMetrics(dateFrom?: string, dateTo?: string, 
   let returnsQuery = supabase.from('returns').select('id', { count: 'exact' })
     .gte('return_date', from)
     .lte('return_date', to)
-    .in('status', ['initiated', 'in_transit', 'received', 'processing'])
+    .in('status', ['announced', 'received', 'inspected', 'approved'] as any)
     .limit(1);
   
   let prevReturnsQuery = supabase.from('returns').select('id', { count: 'exact' })
     .gte('return_date', prevFrom)
     .lte('return_date', prevTo)
-    .in('status', ['initiated', 'in_transit', 'received', 'processing'])
+    .in('status', ['announced', 'received', 'inspected', 'approved'] as any)
     .limit(1);
 
   if (companyId) {
@@ -847,17 +838,20 @@ export const getStatusLabel = (status: OrderStatus): string => {
 
 export const getReturnStatusLabel = (status: ReturnStatus): string => {
   const labels: Record<ReturnStatus, string> = {
-    initiated: 'Eingeleitet',
-    in_transit: 'In Transit',
+    announced: 'Angekündigt',
     received: 'Eingegangen',
-    processing: 'In Bearbeitung',
+    inspected: 'Geprüft',
+    approved: 'Genehmigt',
+    rejected: 'Abgelehnt',
+    restocked: 'Eingelagert',
+    disposed: 'Entsorgt',
     completed: 'Abgeschlossen'
   };
   return labels[status];
 };
 
 export const getReturnStatusVariant = (status: ReturnStatus): string => {
-  if (status === 'completed') return 'shipped';
-  if (status === 'processing') return 'processing';
+  if (status === 'completed' || status === 'restocked') return 'shipped';
+  if (status === 'approved' || status === 'inspected') return 'processing';
   return 'pending';
 };

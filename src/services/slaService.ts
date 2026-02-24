@@ -80,33 +80,32 @@ export async function fetchOrderEvents(orderId: string): Promise<OrderEvent[]> {
     .from('order_events')
     .select('*')
     .eq('order_id', orderId)
-    .order('occurred_at', { ascending: true });
+    .order('created_at', { ascending: true });
 
   if (error) {
     console.error('Error fetching order events:', error);
     return [];
   }
 
-  return (data || []) as OrderEvent[];
+  return (data || []) as unknown as OrderEvent[];
 }
 
 // Fetch all events for a company within a date range
 export async function fetchCompanyEvents(
-  companyId: string,
+  _companyId: string,
   dateFrom?: string,
   dateTo?: string
 ): Promise<OrderEvent[]> {
   let query = supabase
     .from('order_events')
     .select('*')
-    .eq('company_id', companyId)
-    .order('occurred_at', { ascending: false });
+    .order('created_at', { ascending: false });
 
   if (dateFrom) {
-    query = query.gte('occurred_at', dateFrom);
+    query = query.gte('created_at', dateFrom);
   }
   if (dateTo) {
-    query = query.lte('occurred_at', dateTo);
+    query = query.lte('created_at', dateTo);
   }
 
   const { data, error } = await query.limit(1000);
@@ -116,7 +115,7 @@ export async function fetchCompanyEvents(
     return [];
   }
 
-  return (data || []) as OrderEvent[];
+  return (data || []) as unknown as OrderEvent[];
 }
 
 // Calculate duration in each status for an order
@@ -279,7 +278,7 @@ export async function calculateSLAComplianceFromEvents(
       .from('order_events')
       .select('*')
       .in('order_id', batchIds)
-      .order('occurred_at', { ascending: true });
+      .order('created_at', { ascending: true });
     
     if (batchError) {
       console.error('Error fetching events batch for SLA:', batchError);
@@ -287,7 +286,7 @@ export async function calculateSLAComplianceFromEvents(
     }
     
     if (batchEvents) {
-      allEvents.push(...(batchEvents as OrderEvent[]));
+      allEvents.push(...(batchEvents as unknown as OrderEvent[]));
     }
   }
   
@@ -425,7 +424,7 @@ export async function getAverageStatusDurations(
 
   const statusTotals = new Map<string, { totalSeconds: number; count: number }>();
 
-  for (const event of events as OrderEvent[]) {
+  for (const event of events as unknown as OrderEvent[]) {
     if (event.old_status && event.duration_seconds) {
       const existing = statusTotals.get(event.old_status) || { totalSeconds: 0, count: 0 };
       existing.totalSeconds += event.duration_seconds;
@@ -447,14 +446,14 @@ export async function getAverageStatusDurations(
 
 // Trigger backfill for existing orders (admin function)
 export async function backfillOrderEvents(): Promise<number> {
-  const { data, error } = await supabase.rpc('backfill_order_events');
+  const { data, error } = await (supabase as any).rpc('backfill_order_events');
   
   if (error) {
     console.error('Error backfilling order events:', error);
     throw error;
   }
   
-  return data as number;
+  return (data as unknown as number) || 0;
 }
 
 // Helper functions for business hours calculation

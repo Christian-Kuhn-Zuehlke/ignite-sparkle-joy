@@ -218,7 +218,7 @@ const ABCAnalysis = () => {
 
   const dismissRecommendation = async (id: string) => {
     try {
-      await supabase
+      await (supabase as any)
         .from('abc_recommendations')
         .update({ status: 'dismissed', actioned_at: new Date().toISOString() })
         .eq('id', id);
@@ -232,7 +232,7 @@ const ABCAnalysis = () => {
 
   const completeRecommendation = async (id: string) => {
     try {
-      await supabase
+      await (supabase as any)
         .from('abc_recommendations')
         .update({ status: 'completed', actioned_at: new Date().toISOString() })
         .eq('id', id);

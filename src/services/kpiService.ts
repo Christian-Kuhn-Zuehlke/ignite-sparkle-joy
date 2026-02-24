@@ -80,14 +80,14 @@ export async function fetchCompanyKpis(companyId?: string): Promise<CompanyKpi[]
   const { data, error } = await query;
   
   if (error) throw error;
-  return (data || []) as CompanyKpi[];
+  return (data || []) as unknown as CompanyKpi[];
 }
 
 // Fetch latest measurements for KPIs
 export async function fetchLatestMeasurements(kpiIds: string[]): Promise<KpiMeasurement[]> {
   if (kpiIds.length === 0) return [];
 
-  const { data, error } = await supabase
+  const { data, error } = await (supabase as any)
     .from('kpi_measurements')
     .select('*')
     .in('kpi_id', kpiIds)
@@ -172,7 +172,7 @@ export async function upsertKpi(kpi: Partial<CompanyKpi> & { company_id: string;
     .single();
 
   if (error) throw error;
-  return data as CompanyKpi;
+  return data as unknown as CompanyKpi;
 }
 
 // Delete a KPI
@@ -293,7 +293,7 @@ export async function saveMeasurement(
     details: details || {},
   };
 
-  const { data, error } = await supabase
+  const { data, error } = await (supabase as any)
     .from('kpi_measurements')
     .insert(insertData as any)
     .select()
@@ -305,7 +305,7 @@ export async function saveMeasurement(
 
 // Get KPI history for a specific KPI
 export async function fetchKpiHistory(kpiId: string, limit: number = 30): Promise<KpiMeasurement[]> {
-  const { data, error } = await supabase
+  const { data, error } = await (supabase as any)
     .from('kpi_measurements')
     .select('*')
     .eq('kpi_id', kpiId)

@@ -76,16 +76,16 @@ describe('getStatusLabel', () => {
 
 describe('getReturnStatusLabel', () => {
   it('should return German labels for all return statuses', () => {
-    expect(getReturnStatusLabel('initiated')).toBe('Eingeleitet');
-    expect(getReturnStatusLabel('in_transit')).toBe('In Transit');
-    expect(getReturnStatusLabel('received')).toBe('Erhalten');
-    expect(getReturnStatusLabel('processing')).toBe('In Bearbeitung');
+    expect(getReturnStatusLabel('announced')).toBe('Angekündigt');
+    expect(getReturnStatusLabel('received')).toBe('Eingegangen');
+    expect(getReturnStatusLabel('inspected')).toBe('Geprüft');
+    expect(getReturnStatusLabel('approved')).toBe('Genehmigt');
     expect(getReturnStatusLabel('completed')).toBe('Abgeschlossen');
   });
 
   it('should handle all return statuses', () => {
     const statuses: ReturnStatus[] = [
-      'initiated', 'in_transit', 'received', 'processing', 'completed'
+      'announced', 'received', 'inspected', 'approved', 'rejected', 'restocked', 'disposed', 'completed'
     ];
     
     statuses.forEach(status => {

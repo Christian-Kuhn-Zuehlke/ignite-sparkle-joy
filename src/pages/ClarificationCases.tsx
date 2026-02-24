@@ -65,7 +65,7 @@ const ClarificationCases = () => {
         .order('detected_at', { ascending: false });
 
       if (error) throw error;
-      setCases((data || []) as ClarificationCase[]);
+      setCases((data || []) as unknown as ClarificationCase[]);
     } catch (error) {
       console.error('Error fetching cases:', error);
     } finally {
