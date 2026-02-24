@@ -2,21 +2,23 @@
 import { $ } from 'bun';
 
 async function main() {
-  console.log('Checking Supabase status...');
-  
-  try {
-    // Try to get Supabase status (suppress output)
-    await $`bun x supabase status`.quiet();
-    console.log('✓ Supabase is already running\n');
-  } catch (error) {
-    // Supabase is not running, start it
-    console.log('Starting Supabase...\n');
+  // In Lovable Cloud, Supabase is managed remotely — skip local Docker check
+  const skipLocal = process.env.VITE_SUPABASE_URL && !process.env.LOCAL_SUPABASE;
+
+  if (!skipLocal) {
+    console.log('Checking Supabase status...');
     try {
-      await $`bun x supabase start`;
-      console.log('✓ Supabase started successfully\n');
-    } catch (startError) {
-      console.error('Failed to start Supabase. Please start it manually with: bun db:start');
-      process.exit(1);
+      await $`bun x supabase status`.quiet();
+      console.log('✓ Supabase is already running\n');
+    } catch (error) {
+      console.log('Starting Supabase...\n');
+      try {
+        await $`bun x supabase start`;
+        console.log('✓ Supabase started successfully\n');
+      } catch (startError) {
+        console.error('Failed to start Supabase. Please start it manually with: bun db:start');
+        process.exit(1);
+      }
     }
   }
 
