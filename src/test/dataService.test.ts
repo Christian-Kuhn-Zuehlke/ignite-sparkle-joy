@@ -49,10 +49,13 @@ describe('Order Status Functions', () => {
 describe('Return Status Functions', () => {
   describe('getReturnStatusLabel', () => {
     const returnLabels: Record<ReturnStatus, string> = {
-      initiated: 'Initiiert',
-      in_transit: 'Unterwegs',
-      received: 'Empfangen',
-      processing: 'In Bearbeitung',
+      announced: 'Angekündigt',
+      received: 'Eingegangen',
+      inspected: 'Geprüft',
+      approved: 'Genehmigt',
+      rejected: 'Abgelehnt',
+      restocked: 'Eingelagert',
+      disposed: 'Entsorgt',
       completed: 'Abgeschlossen',
     };
 
@@ -64,16 +67,16 @@ describe('Return Status Functions', () => {
   });
 
   describe('getReturnStatusVariant', () => {
-    it('returns secondary for initiated status', () => {
-      expect(getReturnStatusVariant('initiated')).toBe('secondary');
+    it('returns pending for announced status', () => {
+      expect(getReturnStatusVariant('announced')).toBe('pending');
     });
 
-    it('returns success for completed status', () => {
-      expect(getReturnStatusVariant('completed')).toBe('success');
+    it('returns shipped for completed status', () => {
+      expect(getReturnStatusVariant('completed')).toBe('shipped');
     });
 
-    it('returns warning for processing status', () => {
-      expect(getReturnStatusVariant('processing')).toBe('warning');
+    it('returns processing for approved status', () => {
+      expect(getReturnStatusVariant('approved')).toBe('processing');
     });
   });
 });

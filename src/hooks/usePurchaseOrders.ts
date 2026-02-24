@@ -18,17 +18,6 @@ interface PurchaseOrder {
   has_discrepancies?: boolean;
 }
 
-interface PurchaseOrderLine {
-  id: string;
-  purchase_order_id: string;
-  sku: string | null;
-  name: string | null;
-  quantity_ordered: number | null;
-  quantity_received: number | null;
-  unit_cost: number | null;
-  created_at: string;
-}
-
 interface Discrepancy {
   id: string;
   session_id: string;
@@ -247,8 +236,6 @@ export function useCreatePurchaseOrder() {
 // Start receiving session
 export function useStartReceiving() {
   const queryClient = useQueryClient();
-  const { activeCompanyId } = useAuth();
-
   return useMutation({
     mutationFn: async (poId: string) => {
       // Update PO status
@@ -272,7 +259,6 @@ export function useStartReceiving() {
 // Record receiving count
 export function useRecordReceivingCount() {
   const queryClient = useQueryClient();
-  const _queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async (data: { session_id: string; po_line_id: string; sku: string; qty_received: number }) => {

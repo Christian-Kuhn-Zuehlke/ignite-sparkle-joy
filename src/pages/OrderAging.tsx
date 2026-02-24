@@ -42,12 +42,11 @@ const OPEN_STATUSES: OrderStatus[] = ['received', 'putaway', 'picking', 'packing
 
 interface AgingOrder {
   id: string;
-  source_no: string;
-  order_date: string;
+  source_no: string | null;
+  order_date: string | null;
   status: string;
-  ship_to_name: string;
-  company_id: string;
-  company_name: string;
+  ship_to_name: string | null;
+  company_id: string | null;
   order_amount: number | null;
   ageInDays: number;
   ageInHours: number;
@@ -80,7 +79,7 @@ export default function OrderAging() {
     queryFn: async () => {
       let query = supabase
         .from('orders')
-        .select('id, source_no, order_date, status, ship_to_name, company_id, company_name, order_amount')
+        .select('id, source_no, order_date, status, ship_to_name, company_id, order_amount, created_at')
         .in('status', OPEN_STATUSES)
         .order('order_date', { ascending: true });
 
@@ -102,7 +101,7 @@ export default function OrderAging() {
     const now = new Date();
     
     const processedOrders: AgingOrder[] = orders.map(order => {
-      const orderDate = new Date(order.order_date);
+      const orderDate = new Date(order.order_date || order.created_at);
       const ageInDays = differenceInDays(now, orderDate);
       const ageInHours = differenceInHours(now, orderDate);
       
@@ -127,7 +126,7 @@ export default function OrderAging() {
           comparison = (a.order_amount || 0) - (b.order_amount || 0);
           break;
         case 'date':
-          comparison = new Date(a.order_date).getTime() - new Date(b.order_date).getTime();
+          comparison = new Date(a.order_date || '').getTime() - new Date(b.order_date || '').getTime();
           break;
       }
       return sortDirection === 'desc' ? -comparison : comparison;
@@ -442,7 +441,7 @@ export default function OrderAging() {
                         <span className="text-muted-foreground">{t(`status.${agingData.stats.oldestOrder.status}`)}</span>
                         <span className="text-muted-foreground">•</span>
                         <span className="text-muted-foreground">
-                          {format(new Date(agingData.stats.oldestOrder.order_date), 'dd.MM.yyyy', { locale: dateLocale })}
+                          {format(new Date(agingData.stats.oldestOrder.order_date || ''), 'dd.MM.yyyy', { locale: dateLocale })}
                         </span>
                       </div>
                     </div>
@@ -532,7 +531,7 @@ export default function OrderAging() {
                             <TableCell className="font-medium">{order.source_no}</TableCell>
                             <TableCell className="text-muted-foreground">{order.ship_to_name}</TableCell>
                             <TableCell>
-                              {format(new Date(order.order_date), 'dd.MM.yyyy', { locale: dateLocale })}
+                              {format(new Date(order.order_date || ''), 'dd.MM.yyyy', { locale: dateLocale })}
                             </TableCell>
                             <TableCell>
                               <Badge variant={getAgeBadgeVariant(order.bucket)}>

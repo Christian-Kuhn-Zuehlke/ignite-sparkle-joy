@@ -107,9 +107,6 @@ export function PODetailDialog({ poId, open, onOpenChange }: PODetailDialogProps
                     </CardHeader>
                     <CardContent>
                       <p className="font-medium">{po.supplier_name}</p>
-                      {po.supplier_code && (
-                        <p className="text-sm text-muted-foreground">{po.supplier_code}</p>
-                      )}
                     </CardContent>
                   </Card>
                   <Card>
@@ -122,14 +119,9 @@ export function PODetailDialog({ poId, open, onOpenChange }: PODetailDialogProps
                       <div className="flex items-center gap-2">
                         <Truck className="h-4 w-4 text-muted-foreground" />
                         <p className="font-medium">
-                          {po.eta ? format(new Date(po.eta), 'dd.MM.yyyy') : '-'}
+                          {po.expected_date ? format(new Date(po.expected_date), 'dd.MM.yyyy') : '-'}
                         </p>
                       </div>
-                      {po.arrival_date && (
-                        <p className="mt-1 text-sm text-muted-foreground">
-                          {t('inbound.detail.arrivedOn')}: {format(new Date(po.arrival_date), 'dd.MM.yyyy')}
-                        </p>
-                      )}
                     </CardContent>
                   </Card>
                   <Card>
@@ -139,7 +131,7 @@ export function PODetailDialog({ poId, open, onOpenChange }: PODetailDialogProps
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="font-medium">{po.location || 'Main Warehouse'}</p>
+                      <p className="font-medium">Main Warehouse</p>
                     </CardContent>
                   </Card>
                   <Card>
@@ -149,7 +141,7 @@ export function PODetailDialog({ poId, open, onOpenChange }: PODetailDialogProps
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="font-medium capitalize">{po.source}</p>
+                      <p className="font-medium capitalize">Manual</p>
                     </CardContent>
                   </Card>
                 </div>
@@ -293,7 +285,17 @@ export function PODetailDialog({ poId, open, onOpenChange }: PODetailDialogProps
 
       {po && (
         <ReceivingDialog
-          po={po}
+          po={{
+            id: po.id,
+            po_number: po.po_number || '',
+            lines: po.lines?.map((l: any) => ({
+              id: l.id,
+              sku: l.sku,
+              product_name: l.name || l.product_name || null,
+              qty_expected: l.quantity_ordered ?? l.qty_expected ?? 0,
+              qty_received: l.quantity_received ?? l.qty_received ?? 0,
+            })),
+          }}
           open={receivingOpen}
           onOpenChange={setReceivingOpen}
         />

@@ -72,7 +72,7 @@ const Forecast = () => {
     setIsLoading(true);
     try {
       // Fetch stockout alerts
-      const { data: alertsData } = await supabase
+      const { data: alertsData } = await (supabase as any)
         .from('stockout_alerts')
         .select('*')
         .eq('company_id', effectiveCompanyId)
@@ -84,7 +84,7 @@ const Forecast = () => {
       }
 
       // Fetch replenishment suggestions
-      const { data: suggestionsData } = await supabase
+      const { data: suggestionsData } = await (supabase as any)
         .from('replenishment_suggestions')
         .select('*')
         .eq('company_id', effectiveCompanyId)
@@ -131,7 +131,7 @@ const Forecast = () => {
 
   const acknowledgeAlert = async (id: string) => {
     try {
-      await supabase
+      await (supabase as any)
         .from('stockout_alerts')
         .update({ 
           status: 'acknowledged', 
@@ -148,7 +148,7 @@ const Forecast = () => {
 
   const markAsOrdered = async (id: string) => {
     try {
-      await supabase
+      await (supabase as any)
         .from('replenishment_suggestions')
         .update({ 
           status: 'ordered', 
@@ -165,7 +165,7 @@ const Forecast = () => {
 
   const dismissSuggestion = async (id: string) => {
     try {
-      await supabase
+      await (supabase as any)
         .from('replenishment_suggestions')
         .update({ status: 'dismissed' })
         .eq('id', id);

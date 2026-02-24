@@ -32,31 +32,26 @@ type AppRole = 'viewer' | 'admin' | 'msd_csm' | 'msd_ma' | 'msd_ops' | 'msd_mana
 interface UserWithRole {
   id: string;
   user_id: string;
-  email: string;
+  email: string | null;
   full_name: string | null;
   company_id: string | null;
-  company_name: string | null;
+  company_name?: string | null;
   created_at: string;
-  last_login_at: string | null;
+  last_login_at?: string | null;
   role: AppRole;
   role_id: string;
+  [key: string]: any;
 }
 
 interface Company {
   id: string;
   name: string;
-  domain: string | null;
-  industry: string | null;
-  brand_keywords: string[] | null;
   primary_color: string | null;
   accent_color: string | null;
   logo_url: string | null;
   created_at: string;
   updated_at: string;
-  status?: 'pending' | 'onboarding' | 'live' | 'paused' | 'churned' | null;
-  go_live_date?: string | null;
-  contact_name?: string | null;
-  contact_email?: string | null;
+  [key: string]: any;
 }
 
 export default function Settings() {
@@ -312,7 +307,7 @@ export default function Settings() {
               userCount={users.length}
               companyCount={companies.length}
               adminCount={users.filter((u) => ['admin', 'msd_csm', 'msd_ma', 'system_admin'].includes(u.role)).length}
-              recentUsers={users.slice(0, 8)}
+              recentUsers={users.slice(0, 8) as any}
               isSystemAdmin={isSystemAdmin}
               onNavigateToTab={handleNavigateToTab}
             />
@@ -323,7 +318,7 @@ export default function Settings() {
         {visibleTabs.users && (
           <TabsContent value="users" className="space-y-6">
             <UsersTab
-              users={users}
+              users={users as any}
               companies={companies}
               loading={loading}
               isSystemAdmin={isSystemAdmin}
