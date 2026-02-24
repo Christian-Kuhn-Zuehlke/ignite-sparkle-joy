@@ -29,6 +29,8 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.packaging': 'Verpackung',
     'nav.settings': 'Einstellungen',
     'nav.navigation': 'Navigation',
+    'nav.collapseMenu': 'Menü ausblenden',
+    'nav.expandMenu': 'Menü einblenden',
     'nav.activeCustomer': 'Aktiver Kunde',
     
     // Clarification Cases
@@ -1607,6 +1609,8 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.packaging': 'Packaging',
     'nav.settings': 'Settings',
     'nav.navigation': 'Navigation',
+    'nav.collapseMenu': 'Collapse menu',
+    'nav.expandMenu': 'Expand menu',
     'nav.activeCustomer': 'Active Customer',
     
     // Clarification Cases
@@ -3076,6 +3080,8 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.packaging': 'Emballage',
     'nav.settings': 'Paramètres',
     'nav.navigation': 'Navigation',
+    'nav.collapseMenu': 'Réduire le menu',
+    'nav.expandMenu': 'Développer le menu',
     'nav.activeCustomer': 'Client actif',
     
     // Greetings
@@ -4297,6 +4303,8 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.packaging': 'Imballaggio',
     'nav.settings': 'Impostazioni',
     'nav.navigation': 'Navigazione',
+    'nav.collapseMenu': 'Comprimi menu',
+    'nav.expandMenu': 'Espandi menu',
     'nav.activeCustomer': 'Cliente attivo',
     
     // Greetings
@@ -5518,6 +5526,8 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.packaging': 'Embalaje',
     'nav.settings': 'Configuración',
     'nav.navigation': 'Navegación',
+    'nav.collapseMenu': 'Contraer menú',
+    'nav.expandMenu': 'Expandir menú',
     'nav.activeCustomer': 'Cliente activo',
     
     // Greetings
