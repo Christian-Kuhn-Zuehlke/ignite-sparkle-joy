@@ -58,7 +58,7 @@ export function usePushNotifications() {
 
     const loadSettings = async () => {
       try {
-        const { data, error } = await supabase
+        const { data, error } = await (supabase as any)
           .from('notification_settings')
           .select('*')
           .eq('user_id', user.id)
@@ -78,7 +78,7 @@ export function usePushNotifications() {
             notify_low_stock: data.notify_low_stock ?? true,
             notify_sla_warning: data.notify_sla_warning ?? true,
             notify_returns: data.notify_returns ?? true,
-            email_enabled: (data as any).email_enabled ?? false,
+            email_enabled: data.email_enabled ?? false,
           });
         }
       } catch (error) {
@@ -151,7 +151,7 @@ export function usePushNotifications() {
       // Save subscription to database
       const subscriptionData = subscription.toJSON();
       
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from('notification_settings')
         .upsert({
           user_id: user.id,
@@ -199,7 +199,7 @@ export function usePushNotifications() {
       }
 
       // Update database
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from('notification_settings')
         .update({
           push_enabled: false,
@@ -229,7 +229,7 @@ export function usePushNotifications() {
     if (!user || !companyId) return;
 
     try {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from('notification_settings')
         .upsert({
           user_id: user.id,

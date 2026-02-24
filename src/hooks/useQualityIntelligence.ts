@@ -98,8 +98,8 @@ export function useQualityErrors(days: number = 30) {
       let query = supabase
         .from('quality_errors')
         .select('*')
-        .gte('detected_at', fromDate.toISOString())
-        .order('detected_at', { ascending: false });
+        .gte('created_at', fromDate.toISOString())
+        .order('created_at', { ascending: false });
       
       if (effectiveCompanyId) {
         query = query.eq('company_id', effectiveCompanyId);
@@ -108,7 +108,7 @@ export function useQualityErrors(days: number = 30) {
       const { data, error } = await query;
       
       if (error) throw error;
-      return (data || []) as QualityError[];
+      return (data || []) as unknown as QualityError[];
     },
     enabled: true,
     staleTime: 1000 * 60 * 5,
@@ -124,7 +124,7 @@ export function useQualityScores(days: number = 30) {
       const fromDate = new Date();
       fromDate.setDate(fromDate.getDate() - days);
       
-      let query = supabase
+      let query = (supabase as any)
         .from('quality_scores')
         .select('*')
         .gte('score_date', fromDate.toISOString().split('T')[0])
@@ -137,7 +137,7 @@ export function useQualityScores(days: number = 30) {
       const { data, error } = await query;
       
       if (error) throw error;
-      return (data || []).map(item => ({
+      return (data || []).map((item: any) => ({
         ...item,
         overall_score: item.overall_score ?? 0,
         accuracy_score: item.accuracy_score ?? 0,
@@ -369,7 +369,7 @@ export function useRootCauseCategories() {
   return useQuery({
     queryKey: ['root-cause-categories', effectiveCompanyId],
     queryFn: async () => {
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from('root_cause_categories')
         .select('*')
         .or(`company_id.eq.SYSTEM,company_id.eq.${effectiveCompanyId}`)

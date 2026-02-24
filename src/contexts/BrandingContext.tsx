@@ -873,7 +873,7 @@ export function BrandingProvider({ children }: BrandingProviderProps) {
     try {
       const { data, error } = await supabase
         .from('companies')
-        .select('id, name, domain, industry, brand_keywords, primary_color, accent_color, logo_url, tagline')
+        .select('id, name, primary_color, accent_color, logo_url')
         .eq('id', companyId)
         .maybeSingle();
 
@@ -884,39 +884,14 @@ export function BrandingProvider({ children }: BrandingProviderProps) {
       }
 
       if (data) {
-        // Check if colors need to be extracted
-        if (!data.primary_color && data.domain) {
-          // Automatically try to extract colors from domain (silent, no error toast)
-          const extractedColors = await extractAndSaveColors(data.domain, data.id);
-          
-          if (extractedColors) {
-            // Update local data with extracted colors
-            setCompanyData({
-              ...data,
-              primary_color: extractedColors.primary_color,
-              accent_color: extractedColors.accent_color,
-              tagline: data.tagline,
-            });
-            console.log(`✅ Automatisch Farben extrahiert für ${data.name}: ${extractedColors.primary_color}`);
-          } else {
-            // Use MS Direct fallback colors
-            setCompanyData({
-              ...data,
-              primary_color: MS_DIRECT_PRIMARY,
-              accent_color: MS_DIRECT_ACCENT,
-              tagline: data.tagline,
-            });
-          }
-        } else if (!data.primary_color) {
-          // No domain and no colors - use MS Direct fallback
+        if (!data.primary_color) {
           setCompanyData({
-            ...data,
+            ...(data as any),
             primary_color: MS_DIRECT_PRIMARY,
             accent_color: MS_DIRECT_ACCENT,
-            tagline: data.tagline,
           });
         } else {
-          setCompanyData(data);
+          setCompanyData(data as any);
         }
       }
     } catch (err) {

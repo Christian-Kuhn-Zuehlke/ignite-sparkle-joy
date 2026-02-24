@@ -128,6 +128,7 @@ export {
   Bars2Icon as GripVertical,
   ViewColumnsIcon as PanelLeft,
   FolderOpenIcon as FolderOpen,
+  DocumentMagnifyingGlassIcon as FileQuestion,
 } from '@heroicons/react/24/outline';
 
 // Separate exports for duplicate base icons

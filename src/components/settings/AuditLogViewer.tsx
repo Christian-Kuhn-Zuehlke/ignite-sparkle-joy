@@ -49,7 +49,7 @@ const getDateLocale = (lang: string): Locale => {
   return locales[lang] || de;
 };
 
-const actionIcons: Record<AuditAction, React.ReactNode> = {
+const actionIcons: Record<string, React.ReactNode> = {
   login: <LogIn className="h-4 w-4" />,
   logout: <LogOut className="h-4 w-4" />,
   view: <Eye className="h-4 w-4" />,
@@ -61,9 +61,12 @@ const actionIcons: Record<AuditAction, React.ReactNode> = {
   approve: <CheckCircle className="h-4 w-4" />,
   reject: <XCircle className="h-4 w-4" />,
   status_change: <RefreshCw className="h-4 w-4" />,
+  role_change: <RefreshCw className="h-4 w-4" />,
+  settings_change: <Edit className="h-4 w-4" />,
+  bulk_action: <Activity className="h-4 w-4" />,
 };
 
-const actionColors: Record<AuditAction, string> = {
+const actionColors: Record<string, string> = {
   login: 'bg-green-100 text-green-700',
   logout: 'bg-gray-100 text-gray-700',
   view: 'bg-blue-100 text-blue-700',
@@ -75,37 +78,25 @@ const actionColors: Record<AuditAction, string> = {
   approve: 'bg-green-100 text-green-700',
   reject: 'bg-red-100 text-red-700',
   status_change: 'bg-blue-100 text-blue-700',
+  role_change: 'bg-blue-100 text-blue-700',
+  settings_change: 'bg-amber-100 text-amber-700',
+  bulk_action: 'bg-purple-100 text-purple-700',
 };
 
 function AuditLogRow({ log, t, dateLocale }: { log: AuditLogEntry; t: (key: string) => string; dateLocale: Locale }) {
   const [showDetails, setShowDetails] = useState(false);
 
-  const actionLabels: Record<AuditAction, string> = {
+  const actionLabels: Record<string, string> = {
     login: t('auditLog.actions.login'),
     logout: t('auditLog.actions.logout'),
-    view: t('auditLog.actions.view'),
     create: t('auditLog.actions.create'),
     update: t('auditLog.actions.update'),
     delete: t('auditLog.actions.delete'),
     export: t('auditLog.actions.export'),
     import: t('auditLog.actions.import'),
-    approve: t('auditLog.actions.approve'),
-    reject: t('auditLog.actions.reject'),
-    status_change: t('auditLog.actions.statusChange'),
-  };
-
-  const resourceLabels: Record<AuditResource, string> = {
-    order: t('auditLog.resources.order'),
-    inventory: t('auditLog.resources.inventory'),
-    return: t('auditLog.resources.return'),
-    user: t('auditLog.resources.user'),
-    membership: t('auditLog.resources.membership'),
-    company: t('auditLog.resources.company'),
-    settings: t('auditLog.resources.settings'),
-    api_key: t('auditLog.resources.apiKey'),
-    webhook: t('auditLog.resources.webhook'),
-    integration: t('auditLog.resources.integration'),
-    kpi: t('auditLog.resources.kpi'),
+    role_change: t('auditLog.actions.statusChange'),
+    settings_change: t('auditLog.actions.statusChange'),
+    bulk_action: t('auditLog.actions.statusChange'),
   };
 
   return (
@@ -116,23 +107,23 @@ function AuditLogRow({ log, t, dateLocale }: { log: AuditLogEntry; t: (key: stri
       >
         <TableCell>
           <div className="flex items-center gap-2">
-            <span className={`p-1.5 rounded ${actionColors[log.action]}`}>
-              {actionIcons[log.action]}
+            <span className={`p-1.5 rounded ${actionColors[log.action] || 'bg-gray-100 text-gray-700'}`}>
+              {actionIcons[log.action] || <Activity className="h-4 w-4" />}
             </span>
-            <span className="font-medium">{actionLabels[log.action]}</span>
+            <span className="font-medium">{actionLabels[log.action] || log.action}</span>
           </div>
         </TableCell>
         <TableCell>
           <Badge variant="outline">
-            {resourceLabels[log.resource_type]}
+            {(log as any).entity_type || '-'}
           </Badge>
         </TableCell>
         <TableCell>
           <div className="flex items-center gap-2">
             <User className="h-4 w-4 text-muted-foreground" />
             <div>
-              <p className="text-sm font-medium">{log.user_name || t('auditLog.system')}</p>
-              <p className="text-xs text-muted-foreground">{log.user_email}</p>
+              <p className="text-sm font-medium">{(log as any).user_name || t('auditLog.system')}</p>
+              <p className="text-xs text-muted-foreground">{(log as any).user_email}</p>
             </div>
           </div>
         </TableCell>
@@ -150,9 +141,9 @@ function AuditLogRow({ log, t, dateLocale }: { log: AuditLogEntry; t: (key: stri
               <pre className="text-xs bg-background p-2 rounded border overflow-x-auto">
                 {JSON.stringify(log.details, null, 2)}
               </pre>
-              {log.resource_id && (
+              {(log as any).entity_id && (
                 <p className="mt-2 text-xs text-muted-foreground">
-                  {t('auditLog.resourceId')}: {log.resource_id}
+                  {t('auditLog.resourceId')}: {(log as any).entity_id}
                 </p>
               )}
             </div>
@@ -188,32 +179,17 @@ export function AuditLogViewer() {
 
   const { data: stats } = useAuditLogStats(companyId);
 
-  const actionLabels: Record<AuditAction, string> = {
+  const actionLabels: Record<string, string> = {
     login: t('auditLog.actions.login'),
     logout: t('auditLog.actions.logout'),
-    view: t('auditLog.actions.view'),
     create: t('auditLog.actions.create'),
     update: t('auditLog.actions.update'),
     delete: t('auditLog.actions.delete'),
     export: t('auditLog.actions.export'),
     import: t('auditLog.actions.import'),
-    approve: t('auditLog.actions.approve'),
-    reject: t('auditLog.actions.reject'),
-    status_change: t('auditLog.actions.statusChange'),
-  };
-
-  const resourceLabels: Record<AuditResource, string> = {
-    order: t('auditLog.resources.order'),
-    inventory: t('auditLog.resources.inventory'),
-    return: t('auditLog.resources.return'),
-    user: t('auditLog.resources.user'),
-    membership: t('auditLog.resources.membership'),
-    company: t('auditLog.resources.company'),
-    settings: t('auditLog.resources.settings'),
-    api_key: t('auditLog.resources.apiKey'),
-    webhook: t('auditLog.resources.webhook'),
-    integration: t('auditLog.resources.integration'),
-    kpi: t('auditLog.resources.kpi'),
+    role_change: t('auditLog.actions.statusChange'),
+    settings_change: t('auditLog.actions.statusChange'),
+    bulk_action: t('auditLog.actions.statusChange'),
   };
 
   // Filter logs by search query
@@ -221,9 +197,9 @@ export function AuditLogViewer() {
     if (!searchQuery) return true;
     const query = searchQuery.toLowerCase();
     return (
-      log.user_email?.toLowerCase().includes(query) ||
-      log.user_name?.toLowerCase().includes(query) ||
-      log.resource_id?.toLowerCase().includes(query) ||
+      (log as any).user_email?.toLowerCase().includes(query) ||
+      (log as any).user_name?.toLowerCase().includes(query) ||
+      (log as any).entity_id?.toLowerCase().includes(query) ||
       JSON.stringify(log.details).toLowerCase().includes(query)
     );
   });
@@ -235,12 +211,12 @@ export function AuditLogViewer() {
       [t('auditLog.timestamp'), t('auditLog.action'), t('auditLog.resource'), t('auditLog.user'), t('common.email'), t('settings.company'), t('auditLog.resourceId'), t('common.details')].join(','),
       ...filteredLogs.map(log => [
         format(new Date(log.created_at), 'yyyy-MM-dd HH:mm:ss'),
-        actionLabels[log.action],
-        resourceLabels[log.resource_type],
-        log.user_name || '',
-        log.user_email || '',
+        actionLabels[log.action] || log.action,
+        (log as any).entity_type || '',
+        (log as any).user_name || '',
+        (log as any).user_email || '',
         log.company_id || '',
-        log.resource_id || '',
+        (log as any).entity_id || '',
         JSON.stringify(log.details).replace(/"/g, '""'),
       ].map(v => `"${v}"`).join(','))
     ].join('\n');
@@ -381,9 +357,10 @@ export function AuditLogViewer() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">{t('common.all')}</SelectItem>
-                  {Object.entries(resourceLabels).map(([key, label]) => (
-                    <SelectItem key={key} value={key}>{label}</SelectItem>
-                  ))}
+                  <SelectItem value="order">{t('auditLog.resources.order')}</SelectItem>
+                  <SelectItem value="inventory">{t('auditLog.resources.inventory')}</SelectItem>
+                  <SelectItem value="user">{t('auditLog.resources.user')}</SelectItem>
+                  <SelectItem value="settings">{t('auditLog.resources.settings')}</SelectItem>
                 </SelectContent>
               </Select>
             </div>

@@ -4,11 +4,11 @@ import { useEffectiveCompanyId } from './useEffectiveCompanyId';
 
 interface FeatureToggle {
   id: string;
-  company_id: string;
+  company_id: string | null;
   feature_key: string;
-  feature_name: string;
-  description: string | null;
-  is_enabled: boolean;
+  is_enabled: boolean | null;
+  created_at: string;
+  updated_at: string;
 }
 
 /**
