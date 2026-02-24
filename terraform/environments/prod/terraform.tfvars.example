@@ -1,0 +1,4 @@
+# Production Environment - Variable Values
+# TO BE CONFIGURED
+
+# Copy from environments/dev/terraform.tfvars.example and adjust for production

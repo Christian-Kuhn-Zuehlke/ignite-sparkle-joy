@@ -1,0 +1,31 @@
+# Development Environment - Variable Values
+# Copy this file to terraform.tfvars and fill in your values
+# DO NOT commit terraform.tfvars to version control!
+
+project_name = "ignite"
+location     = "switzerlandnorth"
+
+# Static Web App
+static_web_app_sku = "Free"
+
+# Container Registry
+acr_sku = "Basic"
+
+# ===========================================
+# External PostgreSQL Configuration
+# ===========================================
+# PostgreSQL Connection String (REQUIRED)
+# IMPORTANT: Must include password - standard Supabase images require password auth
+# Format: postgresql://username:password@hostname:port/database?sslmode=require
+# 
+# Example for cross-subscription PostgreSQL:
+# postgresql://supabase_app:YourPassword@pgsql-crossborderx-test-msd-chn.private.postgres.database.azure.com:5432/ignite_dev?sslmode=require
+#
+# Set via environment variable: TF_VAR_postgres_connection_string
+
+# Supabase Secrets (REQUIRED)
+# Generate these using: openssl rand -base64 32
+# Set via environment variables:
+#   TF_VAR_supabase_jwt_secret
+#   TF_VAR_supabase_anon_key
+#   TF_VAR_supabase_service_key

@@ -1,0 +1,29 @@
+# Terraform
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+.terraform.lock.hcl
+crash.log
+crash.*.log
+*.tfvars
+!*.tfvars.example
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+
+# Terraform plan files
+tfplan
+*.tfplan
+
+# Environment files
+.env
+.env.local
+.env.*.local
+terraform.env
+
+# Outputs
+outputs.json
