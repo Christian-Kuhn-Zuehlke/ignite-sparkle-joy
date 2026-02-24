@@ -4,20 +4,20 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const badgeVariants = cva(
-  "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+  "inline-flex items-center rounded-full border-0 px-2.5 py-0.5 text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring/40",
   {
     variants: {
       variant: {
-        default: "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
-        secondary: "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        destructive: "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
-        outline: "text-foreground",
+        default: "bg-primary/15 text-primary",
+        secondary: "bg-secondary/15 text-secondary",
+        destructive: "bg-destructive/15 text-destructive",
+        outline: "border border-border text-foreground",
         // Status variants for fulfillment
-        shipped: "border-transparent bg-status-shipped/15 text-status-shipped",
-        processing: "border-transparent bg-status-processing/15 text-status-processing",
-        pending: "border-transparent bg-status-pending/15 text-status-pending",
-        exception: "border-transparent bg-status-exception/15 text-status-exception",
-        return: "border-transparent bg-status-return/15 text-status-return",
+        shipped: "bg-status-shipped/15 text-status-shipped",
+        processing: "bg-status-processing/15 text-status-processing",
+        pending: "bg-status-pending/15 text-status-pending",
+        exception: "bg-status-exception/15 text-status-exception",
+        return: "bg-status-return/15 text-status-return",
       },
     },
     defaultVariants: {
