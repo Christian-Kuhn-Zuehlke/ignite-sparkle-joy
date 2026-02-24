@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { FileText, Sparkles, Download, RefreshCw, ChevronDown, ChevronUp } from 'lucide-react';
+import { FileText, Sparkles, Download, RefreshCw, ChevronDown, ChevronUp } from '@/components/icons';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';

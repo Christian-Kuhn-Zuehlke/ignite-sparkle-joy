@@ -67,7 +67,7 @@ export function NotificationsPopover() {
         .limit(10);
       
       if (error) throw error;
-      return data?.filter(item => item.on_hand <= (item.low_stock_threshold || 0)) || [];
+      return data?.filter(item => (item.on_hand ?? 0) <= (item.low_stock_threshold || 0)) || [];
     },
   });
 
@@ -88,7 +88,7 @@ export function NotificationsPopover() {
       id: `stock-${item.id}`,
       type: 'warning' as const,
       title: t('notifications.lowStock'),
-      message: t('notifications.lowStockMessage').replace('{name}', item.name).replace('{sku}', item.sku).replace('{count}', String(item.on_hand)),
+      message: t('notifications.lowStockMessage').replace('{name}', item.name || '').replace('{sku}', item.sku).replace('{count}', String(item.on_hand ?? 0)),
       timestamp: new Date(),
       read: readNotifications.has(`stock-${item.id}`),
       link: '/inventory',

@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Home, Package, BarChart3, Settings, Users, Bell } from "lucide-react";
+import { Home, Package, BarChart3, Settings, Users, Bell } from "@/components/icons";
 
 // Curated palettes from BrandingContext
 const CURATED_PALETTES = {

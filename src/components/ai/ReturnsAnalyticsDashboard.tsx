@@ -115,9 +115,10 @@ export const ReturnsAnalyticsDashboard: React.FC = () => {
       // Group return lines by SKU
       const itemStats = new Map<string, { sku: string; name: string; count: number }>();
       returnLines?.forEach(line => {
-        const existing = itemStats.get(line.sku) || { sku: line.sku, name: line.name, count: 0 };
-        existing.count += line.quantity;
-        itemStats.set(line.sku, existing);
+        const sku = line.sku || 'unknown';
+        const existing = itemStats.get(sku) || { sku, name: line.name || '', count: 0 };
+        existing.count += line.quantity || 0;
+        itemStats.set(sku, existing);
       });
 
       const topItems = Array.from(itemStats.values())

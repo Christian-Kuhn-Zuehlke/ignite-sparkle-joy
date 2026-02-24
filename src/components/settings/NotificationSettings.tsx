@@ -42,8 +42,8 @@ export function NotificationSettings() {
     
     setEmailLoading(true);
     try {
-      const { error } = await supabase
-        .from('notification_settings')
+      const { error } = await (supabase
+        .from as any)('notification_settings')
         .upsert({
           user_id: user.id,
           company_id: profile.company_id,

@@ -6,7 +6,7 @@ import { InboundDashboard } from '@/components/inbound/InboundDashboard';
 import { POList } from '@/components/inbound/POList';
 import { CreatePODialog } from '@/components/inbound/CreatePODialog';
 import { Button } from '@/components/ui/button';
-import { Plus } from 'lucide-react';
+import { Plus } from '@/components/icons';
 import { useAuth } from '@/contexts/AuthContext';
 
 export default function Inbound() {

@@ -47,18 +47,18 @@ export function BrandColorSettings({ companyId: propCompanyId }: BrandColorSetti
     try {
       const { data, error } = await supabase
         .from('companies')
-        .select('primary_color, accent_color, domain, industry, brand_keywords, tagline')
+        .select('primary_color, accent_color')
         .eq('id', propCompanyId)
         .single();
 
       if (error) throw error;
-      
-      setPrimaryColor(data.primary_color || '#6366f1');
-      setAccentColor(data.accent_color || '#22c55e');
-      setDomain(data.domain || '');
-      setIndustry(data.industry || '');
-      setKeywords(data.brand_keywords?.join(', ') || '');
-      setTagline(data.tagline || '');
+      const d = data as any;
+      setPrimaryColor(d.primary_color || '#6366f1');
+      setAccentColor(d.accent_color || '#22c55e');
+      setDomain(d.domain || '');
+      setIndustry(d.industry || '');
+      setKeywords(d.brand_keywords?.join(', ') || '');
+      setTagline(d.tagline || '');
     } catch (error) {
       console.error('Error loading company branding:', error);
     }

@@ -4,7 +4,7 @@ import { Progress } from '@/components/ui/progress';
 import { useShippingAnomalies } from '@/hooks/usePackagingIntelligence';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Truck, AlertTriangle, DollarSign } from 'lucide-react';
+import { Truck, AlertTriangle, DollarSign } from '@/components/icons';
 
 export function CarrierAnalysis() {
   const { data: anomalies, isLoading } = useShippingAnomalies(false);

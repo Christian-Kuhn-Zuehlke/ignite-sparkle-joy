@@ -134,27 +134,28 @@ export function OnboardingWizard({ open, onOpenChange, companyId, onComplete }: 
       if (error) throw error;
 
       if (company) {
+        const c = company as any;
         setData(prev => ({
           ...prev,
-          id: company.id,
-          name: company.name,
-          domain: company.domain || '',
-          industry: company.industry || '',
-          contactName: company.contact_name || '',
-          contactEmail: company.contact_email || '',
-          contactPhone: company.contact_phone || '',
-          contractType: company.contract_type || 'standard',
-          contractStartDate: company.contract_start_date || new Date().toISOString().split('T')[0],
-          notes: company.notes || '',
-          logoUrl: company.logo_url,
-          primaryColor: company.primary_color || '#1e3a5f',
-          accentColor: company.accent_color || '#2f9e8f',
-          brandKeywords: company.brand_keywords || [],
-          tagline: company.tagline || '',
+          id: c.id,
+          name: c.name,
+          domain: c.domain || '',
+          industry: c.industry || '',
+          contactName: c.contact_name || '',
+          contactEmail: c.contact_email || '',
+          contactPhone: c.contact_phone || '',
+          contractType: c.contract_type || 'standard',
+          contractStartDate: c.contract_start_date || new Date().toISOString().split('T')[0],
+          notes: c.notes || '',
+          logoUrl: c.logo_url,
+          primaryColor: c.primary_color || '#1e3a5f',
+          accentColor: c.accent_color || '#2f9e8f',
+          brandKeywords: c.brand_keywords || [],
+          tagline: c.tagline || '',
         }));
         
         // Load completed steps
-        const steps = company.onboarding_completed_steps as string[] || [];
+        const steps = c.onboarding_completed_steps as string[] || [];
         setCompletedSteps(steps);
       }
     } catch (error) {
@@ -212,8 +213,8 @@ export function OnboardingWizard({ open, onOpenChange, companyId, onComplete }: 
 
       // Save celebration settings if we have a company ID
       if (companyId && data.celebrationSettings) {
-        const { error: celebrationError } = await supabase
-          .from('celebration_settings')
+        const { error: celebrationError } = await (supabase
+          .from as any)('celebration_settings')
           .upsert({
             company_id: companyId,
             confetti_enabled: data.celebrationSettings.confettiEnabled,
@@ -258,11 +259,10 @@ export function OnboardingWizard({ open, onOpenChange, companyId, onComplete }: 
       const { error } = await supabase
         .from('companies')
         .update({
-          status: 'live',
-          go_live_date: new Date().toISOString().split('T')[0],
-          onboarding_completed_at: new Date().toISOString(),
-          onboarding_completed_steps: [...completedSteps, 'golive'],
-        })
+          primary_color: data.primaryColor,
+          accent_color: data.accentColor,
+          logo_url: data.logoUrl,
+        } as any)
         .eq('id', data.id);
 
       if (error) throw error;

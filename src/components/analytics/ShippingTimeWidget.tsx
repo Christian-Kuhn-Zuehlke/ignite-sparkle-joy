@@ -55,7 +55,7 @@ export function ShippingTimeWidget() {
 
       for (const order of (orders || [])) {
         if (!order.posted_shipment_date) continue;
-        const orderDate = new Date(order.order_date);
+        const orderDate = new Date(order.order_date || '');
         const shipDate = new Date(order.posted_shipment_date);
         const processingDays = (shipDate.getTime() - orderDate.getTime()) / (1000 * 60 * 60 * 24);
         

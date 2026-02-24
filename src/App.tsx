@@ -11,7 +11,7 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { ConditionalOverlays } from "@/components/layout/ConditionalOverlays";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
-import { Loader2 } from "lucide-react";
+import { Loader2 } from "@/components/icons";
 
 // Lazy load pages for code splitting
 const Index = lazy(() => import("./pages/Index"));

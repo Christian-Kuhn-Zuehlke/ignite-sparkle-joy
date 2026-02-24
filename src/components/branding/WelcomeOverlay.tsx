@@ -242,15 +242,14 @@ export function WelcomeOverlay() {
         // Calculate avg processing time from order_events
         const { data: recentEvents } = await supabase
           .from('order_events')
-          .select('duration_seconds')
+          .select('metadata')
           .eq('event_type', 'status_change')
-          .eq('new_status', 'shipped')
-          .order('occurred_at', { ascending: false })
+          .order('created_at', { ascending: false })
           .limit(100);
 
         let avgProcessingTime = '-';
         if (recentEvents && recentEvents.length > 0) {
-          const validDurations = recentEvents.filter(e => e.duration_seconds).map(e => e.duration_seconds!);
+          const validDurations = recentEvents.filter(e => (e.metadata as any)?.duration_seconds).map(e => (e.metadata as any).duration_seconds as number);
           if (validDurations.length > 0) {
             const avgSeconds = validDurations.reduce((a, b) => a + b, 0) / validDurations.length;
             const hours = Math.floor(avgSeconds / 3600);

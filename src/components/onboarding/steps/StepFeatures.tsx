@@ -100,7 +100,7 @@ export function StepFeatures({ companyId }: StepFeaturesProps) {
         // Update features with DB values
         setFeatures(prev => prev.map(f => {
           const dbFeature = data.find(d => d.feature_key === f.key);
-          return dbFeature ? { ...f, enabled: dbFeature.is_enabled } : f;
+          return dbFeature ? { ...f, enabled: dbFeature.is_enabled ?? false } : f;
         }));
       }
     } catch (error) {

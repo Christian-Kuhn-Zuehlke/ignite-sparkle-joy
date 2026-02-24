@@ -125,6 +125,9 @@ export {
   XMarkIcon as X,
   XCircleIcon as XCircle,
   BoltIcon as Zap,
+  Bars2Icon as GripVertical,
+  ViewColumnsIcon as PanelLeft,
+  FolderOpenIcon as FolderOpen,
 } from '@heroicons/react/24/outline';
 
 // Separate exports for duplicate base icons

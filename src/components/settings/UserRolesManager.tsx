@@ -88,7 +88,7 @@ export function UserRolesManager({ userId, onRolesChanged }: UserRolesManagerPro
       setAdding(true);
       const { data, error } = await supabase
         .from('user_roles')
-        .insert({ user_id: userId, role: selectedNewRole })
+        .insert({ user_id: userId, role: selectedNewRole } as any)
         .select('id, role')
         .single();
 

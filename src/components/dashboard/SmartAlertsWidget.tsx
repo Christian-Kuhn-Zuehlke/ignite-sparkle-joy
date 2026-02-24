@@ -73,7 +73,7 @@ export function SmartAlertsWidget() {
 
       if (slaRiskOrders && slaRiskOrders.length > 0) {
         const criticalCount = slaRiskOrders.filter(o => 
-          differenceInHours(now, new Date(o.order_date)) > 48
+          differenceInHours(now, new Date(o.order_date || '')) > 48
         ).length;
 
         generatedAlerts.push({
@@ -101,7 +101,7 @@ export function SmartAlertsWidget() {
 
       if (inventoryItems) {
         const lowStockItems = inventoryItems.filter(item => 
-          item.low_stock_threshold && item.on_hand <= item.low_stock_threshold
+          item.low_stock_threshold && (item.on_hand ?? 0) <= item.low_stock_threshold
         );
         const criticalItems = lowStockItems.filter(item => (item.available || 0) <= 5);
 

@@ -38,18 +38,18 @@ export function DeletedUsersManagement() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from('profiles')
-        .select('id, user_id, email, full_name, company_name, deleted_at, deletion_reason')
+        .select('id, user_id, email, full_name, deleted_at, deletion_reason')
         .not('deleted_at', 'is', null)
         .order('deleted_at', { ascending: false });
 
       if (error) throw error;
-      return data as DeletedUser[];
+      return (data as any as DeletedUser[]);
     }
   });
 
   const restoreMutation = useMutation({
     mutationFn: async (userId: string) => {
-      const { error } = await supabase.rpc('restore_user_account', {
+      const { error } = await (supabase.rpc as any)('restore_user_account', {
         p_user_id: userId
       });
       if (error) throw error;

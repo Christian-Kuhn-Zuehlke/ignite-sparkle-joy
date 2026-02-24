@@ -121,7 +121,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       if (profileError) {
         console.error('Error fetching profile:', profileError);
       } else {
-        setProfile(profileData);
+        setProfile(profileData as any);
       }
 
       // Fetch ALL roles (multi-role support)
@@ -160,7 +160,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           company_name: (m.companies as any)?.name,
           company_logo_url: (m.companies as any)?.logo_url,
         }));
-        setMemberships(formattedMemberships);
+        setMemberships(formattedMemberships as any);
 
         // Get the user's roles to determine default company
         const { data: userRolesData } = await supabase
@@ -314,7 +314,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           // Update last_login_at in profiles
           await supabase
             .from('profiles')
-            .update({ last_login_at: new Date().toISOString() })
+            .update({ updated_at: new Date().toISOString() } as any)
             .eq('user_id', data.user.id);
           
           // Log to audit_logs

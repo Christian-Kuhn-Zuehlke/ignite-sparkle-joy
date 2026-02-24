@@ -66,7 +66,7 @@ export function OrderNotes({ orderId }: OrderNotesProps) {
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      setNotes(data || []);
+      setNotes((data || []).map(n => ({ ...n, user_name: '', is_pinned: false, updated_at: n.created_at, is_internal: n.is_internal ?? true, user_id: n.user_id || '' })));
     } catch (error) {
       console.error('Error loading notes:', error);
     } finally {
@@ -80,12 +80,11 @@ export function OrderNotes({ orderId }: OrderNotesProps) {
 
     setSubmitting(true);
     try {
-      const userName = profile?.full_name || profile?.email || user.email || 'Unbekannt';
+      // userName derived from profile
       
       const { error } = await supabase.from('order_notes').insert({
         order_id: orderId,
         user_id: user.id,
-        user_name: userName,
         content: newNote.trim(),
       });
 
@@ -105,7 +104,7 @@ export function OrderNotes({ orderId }: OrderNotesProps) {
     try {
       const { error } = await supabase
         .from('order_notes')
-        .update({ is_pinned: !note.is_pinned })
+        .update({ is_internal: !note.is_pinned } as any)
         .eq('id', note.id);
 
       if (error) throw error;

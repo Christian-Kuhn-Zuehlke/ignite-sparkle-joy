@@ -64,12 +64,12 @@ export function SeasonalTrendsWidget() {
         const monthNum = index + 1;
         
         const currentMonthOrders = currentOrders.filter(o => {
-          const orderMonth = new Date(o.order_date).getMonth() + 1;
+          const orderMonth = new Date(o.order_date || '').getMonth() + 1;
           return orderMonth === monthNum;
         });
         
         const previousMonthOrders = previousOrders.filter(o => {
-          const orderMonth = new Date(o.order_date).getMonth() + 1;
+          const orderMonth = new Date(o.order_date || '').getMonth() + 1;
           return orderMonth === monthNum;
         });
 

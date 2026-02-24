@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Brain, MessageSquare, TrendingUp, AlertTriangle, Sparkles, Lightbulb, Package, RotateCcw, BarChart3, Search, Bot, Gauge, Timer } from 'lucide-react';
+import { Brain, MessageSquare, TrendingUp, AlertTriangle, Sparkles, Lightbulb, Package, RotateCcw, BarChart3, Search, Bot, Gauge, Timer } from '@/components/icons';
 import { MainLayout } from '@/components/layout/MainLayout';
 import { EmbeddedChatbot } from '@/components/ai/EmbeddedChatbot';
 import { AgentDashboardWidget } from '@/components/dashboard/AgentDashboardWidget';

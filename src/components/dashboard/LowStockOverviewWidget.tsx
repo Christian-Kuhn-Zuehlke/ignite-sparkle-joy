@@ -56,7 +56,7 @@ export function LowStockOverviewWidget() {
       const criticalItems: InventoryHealthData['criticalItems'] = [];
 
       for (const item of itemsWithThreshold) {
-        const available = item.available ?? (item.on_hand - item.reserved);
+        const available = item.available ?? ((item.on_hand ?? 0) - (item.reserved ?? 0));
         const threshold = item.low_stock_threshold!;
         
         if (available <= 0) {
@@ -64,7 +64,7 @@ export function LowStockOverviewWidget() {
           criticalItems.push({
             id: item.id,
             sku: item.sku,
-            name: item.name,
+            name: item.name || '',
             available,
             threshold,
             percentOfThreshold: 0
@@ -74,7 +74,7 @@ export function LowStockOverviewWidget() {
           criticalItems.push({
             id: item.id,
             sku: item.sku,
-            name: item.name,
+            name: item.name || '',
             available,
             threshold,
             percentOfThreshold: Math.round((available / threshold) * 100)

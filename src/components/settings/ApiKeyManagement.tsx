@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Key, Plus, Trash2, Copy, Eye, EyeOff, Loader2 } from 'lucide-react';
+import { Key, Plus, Trash2, Copy, Eye, EyeOff, Loader2 } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -101,7 +101,7 @@ export function ApiKeyManagement({ companyId, companyName }: ApiKeyManagementPro
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      setApiKeys(data || []);
+      setApiKeys((data || []) as any as ApiKey[]);
     } catch (error) {
       console.error('Error fetching API keys:', error);
       toast.error(t('apiKeys.load.error'));
@@ -135,7 +135,7 @@ export function ApiKeyManagement({ companyId, companyName }: ApiKeyManagementPro
 
       if (error) throw error;
 
-      setApiKeys((prev) => [data, ...prev]);
+      setApiKeys((prev) => [data as any as ApiKey, ...prev]);
       setGeneratedKey(newKey);
       toast.success(t('apiKeys.created.success'));
     } catch (error) {

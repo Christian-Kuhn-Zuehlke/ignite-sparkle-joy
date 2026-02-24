@@ -69,8 +69,8 @@ export function CarrierPerformanceWidget() {
 
       const SLA_TARGET_DAYS = 3; // Consider on-time if delivered within 3 days
 
-      orders.forEach(order => {
-        const carrier = order.shipping_agent_code || 'Unbekannt';
+      orders.forEach((order: any) => {
+        const carrier = order.carrier || 'Unbekannt';
         if (!carrierMap.has(carrier)) {
           carrierMap.set(carrier, { total: 0, delivered: 0, delayed: 0, deliveryDays: [] });
         }
@@ -109,7 +109,7 @@ export function CarrierPerformanceWidget() {
 
       // Weekly trends
       const weeklyMap = new Map<string, { onTime: number; total: number; days: number[] }>();
-      orders.forEach(order => {
+      orders.forEach((order: any) => {
         if (order.status === 'delivered' && order.posted_shipment_date && order.status_date) {
           const shipDate = new Date(order.posted_shipment_date);
           const weekStart = new Date(shipDate);

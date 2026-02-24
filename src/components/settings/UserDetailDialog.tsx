@@ -278,7 +278,7 @@ export function UserDetailDialog({
       if (editForm.role !== user.role) {
         const { error: roleError } = await supabase
           .from('user_roles')
-          .update({ role: editForm.role })
+          .update({ role: editForm.role as any })
           .eq('user_id', user.user_id);
 
         if (roleError) throw roleError;

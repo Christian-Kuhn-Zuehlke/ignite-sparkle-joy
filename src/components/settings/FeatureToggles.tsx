@@ -159,7 +159,7 @@ export function FeatureToggles({ companyId, companyName }: FeatureTogglesProps) 
         .order('feature_name', { ascending: true });
 
       if (error) throw error;
-      setFeatures(data || []);
+      setFeatures((data || []) as any);
     } catch (error) {
       console.error('Error fetching features:', error);
       toast.error(t('features.loadError'));
@@ -186,7 +186,7 @@ export function FeatureToggles({ companyId, companyName }: FeatureTogglesProps) 
 
       if (error) throw error;
 
-      setFeatures(data || []);
+      setFeatures((data || []) as any);
       toast.success(t('features.initialized'));
     } catch (error) {
       console.error('Error initializing features:', error);

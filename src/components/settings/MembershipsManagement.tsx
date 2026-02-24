@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Users, Plus, Trash2, Search, Building2, UserCheck } from 'lucide-react';
+import { Users, Plus, Trash2, Search, Building2, UserCheck } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -156,7 +156,7 @@ export function MembershipsManagement({ companies }: MembershipsManagementProps)
       const { data: roles, error: rolesError } = await supabase
         .from('user_roles')
         .select('user_id, role')
-        .in('role', ['msd_csm', 'msd_ma']);
+        .in('role', ['msd_ops', 'csm'] as any[]);
 
       if (rolesError) throw rolesError;
 
@@ -168,7 +168,7 @@ export function MembershipsManagement({ companies }: MembershipsManagementProps)
           .in('user_id', userIds);
 
         if (profilesError) throw profilesError;
-        setMsdUsers(profiles || []);
+        setMsdUsers((profiles || []) as any);
       }
     } catch (error) {
       console.error('Error fetching MSD users:', error);
