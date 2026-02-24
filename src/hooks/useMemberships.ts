@@ -394,7 +394,7 @@ export function useCompanyCSMAssignments(companyId: string | null) {
       }
 
       // Fetch profiles separately
-      const userIds = [...new Set(assignments.map(a => a.csm_user_id))];
+      const userIds = [...new Set(assignments.map(a => a.user_id))];
       const { data: profiles } = await supabase
         .from('profiles')
         .select('user_id, email, full_name')
@@ -403,13 +403,14 @@ export function useCompanyCSMAssignments(companyId: string | null) {
       const profileMap = new Map(profiles?.map(p => [p.user_id, p]) || []);
 
       return assignments.map(a => {
-        const profile = profileMap.get(a.csm_user_id);
+        const profile = profileMap.get(a.user_id);
         return {
           ...a,
+          csm_user_id: a.user_id,
           csm_email: profile?.email,
           csm_name: profile?.full_name
         };
-      }) as CSMAssignment[];
+      }) as unknown as CSMAssignment[];
     },
     enabled: !!companyId,
   });
@@ -433,7 +434,7 @@ export function useAllCSMAssignments() {
       }
 
       // Fetch profiles and companies separately
-      const userIds = [...new Set(assignments.map(a => a.csm_user_id))];
+      const userIds = [...new Set(assignments.map(a => a.user_id))];
       const companyIds = [...new Set(assignments.map(a => a.company_id))];
 
       const [profilesResult, companiesResult] = await Promise.all([
@@ -445,15 +446,16 @@ export function useAllCSMAssignments() {
       const companyMap = new Map(companiesResult.data?.map(c => [c.id, c]) || []);
 
       return assignments.map(a => {
-        const profile = profileMap.get(a.csm_user_id);
+        const profile = profileMap.get(a.user_id);
         const company = companyMap.get(a.company_id);
         return {
           ...a,
+          csm_user_id: a.user_id,
           company_name: company?.name,
           csm_email: profile?.email,
           csm_name: profile?.full_name
         };
-      }) as CSMAssignment[];
+      }) as unknown as CSMAssignment[];
     },
   });
 }
@@ -473,14 +475,15 @@ export function useMyCSMAssignments() {
           *,
           companies:company_id (name, logo_url, primary_color)
         `)
-        .eq('csm_user_id', user.id);
+        .eq('user_id', user.id);
 
       if (error) throw error;
 
       return (data || []).map(a => ({
         ...a,
+        csm_user_id: a.user_id,
         company_name: (a.companies as any)?.name
-      })) as CSMAssignment[];
+      })) as unknown as CSMAssignment[];
     },
     enabled: !!user,
   });
@@ -497,7 +500,7 @@ export function useAddCSMAssignment() {
     }) => {
       const { data, error } = await supabase
         .from('csm_assignments')
-        .insert(assignment)
+        .insert({ user_id: assignment.csm_user_id, company_id: assignment.company_id })
         .select()
         .single();
 

@@ -137,7 +137,7 @@ const ABCAnalysis = () => {
     setIsLoading(true);
     try {
       // Fetch latest analysis run
-      const { data: runs } = await supabase
+      const { data: runs } = await (supabase as any)
         .from('abc_analysis_runs')
         .select('*')
         .eq('company_id', effectiveCompanyId)
@@ -154,14 +154,14 @@ const ABCAnalysis = () => {
         .from('abc_classifications')
         .select('*')
         .eq('company_id', effectiveCompanyId)
-        .order('total_revenue', { ascending: false });
+        .order('revenue', { ascending: false });
 
       if (classData) {
-        setClassifications(classData as ABCClassification[]);
+        setClassifications(classData as unknown as ABCClassification[]);
       }
 
       // Fetch recommendations
-      const { data: recData } = await supabase
+      const { data: recData } = await (supabase as any)
         .from('abc_recommendations')
         .select('*')
         .eq('company_id', effectiveCompanyId)

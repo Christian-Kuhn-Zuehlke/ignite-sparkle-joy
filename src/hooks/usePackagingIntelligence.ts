@@ -92,7 +92,7 @@ export function usePackagingMetrics(days: number = 30) {
       const fromDate = new Date();
       fromDate.setDate(fromDate.getDate() - days);
       
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from('packaging_metrics')
         .select('*')
         .eq('company_id', companyId)
@@ -100,7 +100,7 @@ export function usePackagingMetrics(days: number = 30) {
         .order('metric_date', { ascending: true });
       
       if (error) throw error;
-      return data as PackagingMetrics[];
+      return (data || []) as PackagingMetrics[];
     },
     enabled: !!companyId,
   });
@@ -113,7 +113,7 @@ export function useShippingAnomalies(unresolvedOnly: boolean = false) {
     queryKey: ['shipping-anomalies', companyId, unresolvedOnly],
     queryFn: async () => {
       if (!companyId) return [];
-      let query = supabase
+      let query = (supabase as any)
         .from('shipping_anomalies')
         .select('*')
         .eq('company_id', companyId)
@@ -126,7 +126,7 @@ export function useShippingAnomalies(unresolvedOnly: boolean = false) {
       
       const { data, error } = await query;
       if (error) throw error;
-      return data as ShippingAnomaly[];
+      return (data || []) as ShippingAnomaly[];
     },
     enabled: !!companyId,
   });
@@ -139,7 +139,7 @@ export function usePackagingRecommendations() {
     queryKey: ['packaging-recommendations', companyId],
     queryFn: async () => {
       if (!companyId) return [];
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from('packaging_recommendations')
         .select('*')
         .eq('company_id', companyId)
@@ -148,7 +148,7 @@ export function usePackagingRecommendations() {
         .limit(50);
       
       if (error) throw error;
-      return data as PackagingRecommendation[];
+      return (data || []) as PackagingRecommendation[];
     },
     enabled: !!companyId,
   });
@@ -161,7 +161,7 @@ export function usePackagingTypes() {
     queryKey: ['packaging-types', companyId],
     queryFn: async () => {
       if (!companyId) return [];
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from('packaging_types')
         .select('*')
         .eq('company_id', companyId)
@@ -169,7 +169,7 @@ export function usePackagingTypes() {
         .order('name');
       
       if (error) throw error;
-      return data as PackagingType[];
+      return (data || []) as PackagingType[];
     },
     enabled: !!companyId,
   });
@@ -180,7 +180,7 @@ export function useResolveAnomaly() {
   
   return useMutation({
     mutationFn: async (anomalyId: string) => {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from('shipping_anomalies')
         .update({
           is_resolved: true,
@@ -201,7 +201,7 @@ export function useImplementRecommendation() {
   
   return useMutation({
     mutationFn: async (recommendationId: string) => {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from('packaging_recommendations')
         .update({
           is_implemented: true,

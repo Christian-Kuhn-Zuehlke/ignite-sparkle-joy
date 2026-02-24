@@ -29,7 +29,7 @@ export function useCelebrationSettings(companyId: string | undefined) {
     queryFn: async () => {
       if (!companyId) return null;
 
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from('celebration_settings')
         .select('*')
         .eq('company_id', companyId)
@@ -58,7 +58,7 @@ export function useCelebrationSettings(companyId: string | undefined) {
     mutationFn: async (settings: Partial<CelebrationSettings>) => {
       if (!companyId) throw new Error('No company ID');
 
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from('celebration_settings')
         .upsert(
           {

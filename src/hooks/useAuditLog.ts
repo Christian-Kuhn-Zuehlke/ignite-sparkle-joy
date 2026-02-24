@@ -1,45 +1,31 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
-import { useAuth } from '@/contexts/AuthContext';
 
+
+// Must match the audit_action enum in the database
 export type AuditAction = 
-  | 'login'
-  | 'logout'
-  | 'view'
   | 'create'
   | 'update'
   | 'delete'
+  | 'login'
+  | 'logout'
   | 'export'
   | 'import'
-  | 'approve'
-  | 'reject'
-  | 'status_change';
+  | 'role_change'
+  | 'settings_change'
+  | 'bulk_action';
 
-export type AuditResource = 
-  | 'order'
-  | 'inventory'
-  | 'return'
-  | 'user'
-  | 'membership'
-  | 'company'
-  | 'settings'
-  | 'api_key'
-  | 'webhook'
-  | 'integration'
-  | 'kpi';
+export type AuditResource = string;
 
 export interface AuditLogEntry {
   id: string;
   user_id: string | null;
-  user_email: string | null;
-  user_name: string | null;
   action: AuditAction;
-  resource_type: AuditResource;
-  resource_id: string | null;
+  entity_type: string | null;
+  entity_id: string | null;
   company_id: string | null;
   details: Record<string, any>;
   ip_address: string | null;
-  user_agent: string | null;
   created_at: string;
 }
 
@@ -53,24 +39,21 @@ interface CreateAuditLogParams {
 
 // Hook to create audit log entries
 export function useCreateAuditLog() {
-  const { activeCompanyId } = useAuth();
+  // activeCompanyId not needed for create_audit_log RPC
 
   return useMutation({
     mutationFn: async ({ 
       action, 
       resourceType, 
       resourceId, 
-      companyId,
       details = {} 
     }: CreateAuditLogParams) => {
-      // Use the database function which handles enum types correctly
       const { data, error } = await supabase
         .rpc('create_audit_log', {
           p_action: action,
-          p_resource_type: resourceType,
-          p_resource_id: resourceId,
-          p_company_id: companyId ?? activeCompanyId ?? undefined,
-          p_details: details,
+          p_entity_type: resourceType,
+          p_entity_id: resourceId,
+          p_details: details as any,
         });
 
       if (error) {
@@ -129,10 +112,10 @@ export function useAuditLogs(params: UseAuditLogsParams = {}) {
         query = query.eq('company_id', companyId);
       }
       if (action) {
-        query = query.eq('action', action);
+        query = query.eq('action', action as any);
       }
       if (resourceType) {
-        query = query.eq('resource_type', resourceType);
+        query = query.eq('entity_type', resourceType);
       }
       if (userId) {
         query = query.eq('user_id', userId);
@@ -147,7 +130,7 @@ export function useAuditLogs(params: UseAuditLogsParams = {}) {
       const { data, error } = await query;
 
       if (error) throw error;
-      return (data || []) as AuditLogEntry[];
+      return (data || []) as unknown as AuditLogEntry[];
     },
   });
 }
@@ -165,7 +148,7 @@ export function useAuditLogStats(companyId?: string | null) {
 
       let query = supabase
         .from('audit_logs')
-        .select('action, resource_type, created_at')
+        .select('action, entity_type, created_at')
         .gte('created_at', weekAgo.toISOString());
 
       if (companyId) {
@@ -176,19 +159,18 @@ export function useAuditLogStats(companyId?: string | null) {
 
       if (error) throw error;
 
-      const logs = data || [];
+      const logs = (data || []) as any[];
       const todayLogs = logs.filter(l => new Date(l.created_at) >= today);
 
-      // Count by action
       const actionCounts: Record<string, number> = {};
       logs.forEach(log => {
         actionCounts[log.action] = (actionCounts[log.action] || 0) + 1;
       });
 
-      // Count by resource
       const resourceCounts: Record<string, number> = {};
       logs.forEach(log => {
-        resourceCounts[log.resource_type] = (resourceCounts[log.resource_type] || 0) + 1;
+        const rt = log.entity_type || 'unknown';
+        resourceCounts[rt] = (resourceCounts[rt] || 0) + 1;
       });
 
       return {

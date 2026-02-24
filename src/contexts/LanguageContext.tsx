@@ -8687,25 +8687,17 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
           // Try to get user's preferred language from profile
           const { data: profile } = await supabase
             .from('profiles')
-            .select('preferred_language, company_id')
+            .select('company_id')
             .eq('user_id', user.id)
             .single();
 
           if (profile) {
-            // Priority 1: User's preferred language
-            if (isValidLanguage(profile.preferred_language)) {
-              setLanguageState(profile.preferred_language);
-              localStorage.setItem('app-language', profile.preferred_language);
-              setIsLoading(false);
-              return;
-            }
-
-            // Priority 2: Company's default language
-            if (profile.company_id) {
+            // Check company's default language
+            if ((profile as any).company_id) {
               const { data: company } = await supabase
                 .from('companies')
                 .select('default_language')
-                .eq('id', profile.company_id)
+                .eq('id', (profile as any).company_id)
                 .single();
 
               if (company && isValidLanguage(company.default_language)) {
@@ -8760,10 +8752,8 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       try {
         const { data: { user } } = await supabase.auth.getUser();
         if (user) {
-          await supabase
-            .from('profiles')
-            .update({ preferred_language: lang })
-            .eq('user_id', user.id);
+          // preferred_language column not in schema yet - skip saving
+          // await supabase.from('profiles').update({ preferred_language: lang }).eq('user_id', user.id);
         }
       } catch (error) {
         console.error('Error saving language preference:', error);
