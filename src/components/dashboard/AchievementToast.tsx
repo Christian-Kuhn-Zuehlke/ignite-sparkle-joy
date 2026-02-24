@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Trophy, Star, Zap, Target, Award, Flame, Crown } from 'lucide-react';
+import { Trophy, Star, Zap, Target, Award, Flame, Crown } from '@/components/icons';
 import { cn } from '@/lib/utils';
 
 export type AchievementType = 

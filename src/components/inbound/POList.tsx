@@ -20,7 +20,7 @@ import {
 } from '@/components/ui/select';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { usePurchaseOrders } from '@/hooks/usePurchaseOrders';
-import { Search, Filter, Download, Eye, Loader2, AlertTriangle } from 'lucide-react';
+import { Search, Filter, Download, Eye, Loader2, AlertTriangle } from '@/components/icons';
 import { format } from 'date-fns';
 import { PODetailDialog } from './PODetailDialog';
 

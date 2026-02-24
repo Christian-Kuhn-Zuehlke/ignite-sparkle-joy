@@ -21,7 +21,7 @@ import {
   Users,
   Search,
   ArrowRight
-} from 'lucide-react';
+} from '@/components/icons';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { supabase } from '@/integrations/supabase/client';
 import { useDebounce } from '@/hooks/useDebounce';

@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { Target, TrendingUp, CheckCircle, AlertTriangle, XCircle, Calendar, Loader2, RefreshCw, Zap } from 'lucide-react';
+import { Target, TrendingUp, CheckCircle, AlertTriangle, XCircle, Calendar, Loader2, RefreshCw, Zap } from '@/components/icons';
 import { MainLayout } from '@/components/layout/MainLayout';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';

@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Send, Bot, User, Loader2, Sparkles, RotateCcw } from 'lucide-react';
+import { Send, Bot, User, Loader2, Sparkles, RotateCcw } from '@/components/icons';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useChatbotStream, ChatMessage } from '@/hooks/useChatbotStream';
 import { cn } from '@/lib/utils';

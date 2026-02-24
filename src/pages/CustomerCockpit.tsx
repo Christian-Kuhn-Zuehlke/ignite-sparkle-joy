@@ -18,7 +18,7 @@ import {
   Star,
   ShoppingBag,
   Download
-} from 'lucide-react';
+} from '@/components/icons';
 import { supabase } from '@/integrations/supabase/client';
 import { useEffectiveCompanyId } from '@/hooks/useEffectiveCompanyId';
 import { CompanyFilterDropdown } from '@/components/filters/CompanyFilterDropdown';

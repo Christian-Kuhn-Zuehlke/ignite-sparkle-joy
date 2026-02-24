@@ -15,7 +15,7 @@ import {
   Flame,
   Zap,
   ChevronDown
-} from 'lucide-react';
+} from '@/components/icons';
 import { 
   AreaChart, 
   Area, 

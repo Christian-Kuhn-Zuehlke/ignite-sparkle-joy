@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Loader2, Package } from 'lucide-react';
+import { ArrowRight, Loader2, Package } from '@/components/icons';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { fetchOrders, getStatusColor, Order } from '@/services/dataService';

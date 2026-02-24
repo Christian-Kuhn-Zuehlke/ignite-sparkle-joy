@@ -22,7 +22,7 @@ import {
   BarChart3,
   TrendingUp,
   Package
-} from 'lucide-react';
+} from '@/components/icons';
 import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 import { differenceInDays, differenceInHours, format } from 'date-fns';
 import { de, enUS, fr, it, es } from 'date-fns/locale';

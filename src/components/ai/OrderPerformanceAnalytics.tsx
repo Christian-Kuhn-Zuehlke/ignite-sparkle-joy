@@ -17,7 +17,7 @@ import {
   Timer,
   Target,
   Zap
-} from 'lucide-react';
+} from '@/components/icons';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
 import { cn } from '@/lib/utils';

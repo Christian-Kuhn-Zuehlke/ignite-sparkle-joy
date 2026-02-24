@@ -12,7 +12,7 @@ import {
   DollarSign,
   Target,
   Sparkles
-} from 'lucide-react';
+} from '@/components/icons';
 import { 
   useQualityMetrics, 
   useQualityErrors,

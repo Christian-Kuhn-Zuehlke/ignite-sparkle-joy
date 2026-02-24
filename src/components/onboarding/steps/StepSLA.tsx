@@ -2,7 +2,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Slider } from '@/components/ui/slider';
 import { OnboardingData } from '../OnboardingWizard';
-import { Clock, Truck, Timer, AlertTriangle } from 'lucide-react';
+import { Clock, Truck, Timer, AlertTriangle } from '@/components/icons';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useLanguage } from '@/contexts/LanguageContext';
 

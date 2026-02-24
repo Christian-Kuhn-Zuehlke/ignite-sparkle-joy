@@ -1,6 +1,6 @@
 import { ReactNode, memo } from 'react';
 import { cn } from '@/lib/utils';
-import { TrendingUp, TrendingDown } from 'lucide-react';
+import { TrendingUp, TrendingDown } from '@/components/icons';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { AnimatedCounter } from '@/components/ui/animated-counter';
 import { useBranding } from '@/contexts/BrandingContext';

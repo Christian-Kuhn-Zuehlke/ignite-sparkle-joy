@@ -10,7 +10,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { toast } from 'sonner';
-import { Mail, Calendar, Send, Loader2, Clock } from 'lucide-react';
+import { Mail, Calendar, Send, Loader2, Clock } from '@/components/icons';
 
 interface ReportSchedule {
   enabled: boolean;

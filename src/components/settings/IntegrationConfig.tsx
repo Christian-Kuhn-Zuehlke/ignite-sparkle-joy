@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Plug, Loader2, Settings, RefreshCw } from 'lucide-react';
+import { Plug, Loader2, Settings, RefreshCw } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';

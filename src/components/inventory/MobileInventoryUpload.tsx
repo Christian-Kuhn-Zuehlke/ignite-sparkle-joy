@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { Upload, FileText, Loader2, CheckCircle, AlertCircle, X } from 'lucide-react';
+import { Upload, FileText, Loader2, CheckCircle, AlertCircle, X } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import {
   Sheet,

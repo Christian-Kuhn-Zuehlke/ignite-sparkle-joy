@@ -1,4 +1,4 @@
-import { CheckCircle2, AlertTriangle, XCircle } from 'lucide-react';
+import { CheckCircle2, AlertTriangle, XCircle } from '@/components/icons';
 import { Badge } from '@/components/ui/badge';
 import { SLAResultStatus, SLAResult } from '@/services/slaService';
 import { useSLAResultsForOrder } from '@/hooks/useSLAResults';

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
-import { Check, ChevronLeft, ChevronRight, Building2, Palette, Clock, Plug, Users, Rocket, PartyPopper, Navigation } from 'lucide-react';
+import { Check, ChevronLeft, ChevronRight, Building2, Palette, Clock, Plug, Users, Rocket, PartyPopper, Navigation } from '@/components/icons';
 import { cn } from '@/lib/utils';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';

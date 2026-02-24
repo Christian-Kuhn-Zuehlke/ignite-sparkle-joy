@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
-import { Package, Truck, Clock, RotateCcw } from 'lucide-react';
+import { Package, Truck, Clock, RotateCcw } from '@/components/icons';
 import { MainLayout } from '@/components/layout/MainLayout';
 import { MetricCard } from '@/components/dashboard/MetricCard';
 import { OrderPipeline } from '@/components/dashboard/OrderPipeline';

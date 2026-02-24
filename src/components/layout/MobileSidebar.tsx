@@ -23,7 +23,7 @@ import {
   ChevronRight,
   ChevronDown,
   type LucideIcon
-} from 'lucide-react';
+} from '@/components/icons';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/contexts/AuthContext';
 import { useBranding } from '@/contexts/BrandingContext';

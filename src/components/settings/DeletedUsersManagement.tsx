@@ -7,7 +7,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import { Badge } from '@/components/ui/badge';
 import { toast } from 'sonner';
-import { RotateCcw, Trash2, User, Calendar, MessageSquare } from 'lucide-react';
+import { RotateCcw, Trash2, User, Calendar, MessageSquare } from '@/components/icons';
 import { format } from 'date-fns';
 import { de, enUS, fr, it, es } from 'date-fns/locale';
 import { useLanguage } from '@/contexts/LanguageContext';

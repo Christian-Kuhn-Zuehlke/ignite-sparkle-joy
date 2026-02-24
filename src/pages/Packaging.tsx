@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Package, AlertTriangle, Lightbulb, TrendingUp, Truck } from 'lucide-react';
+import { Package, AlertTriangle, Lightbulb, TrendingUp, Truck } from '@/components/icons';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { PackagingOverview } from '@/components/packaging/PackagingOverview';

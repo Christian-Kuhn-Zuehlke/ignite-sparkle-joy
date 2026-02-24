@@ -2,7 +2,7 @@ import { useState, useCallback, useRef } from 'react';
 import { MainLayout } from '@/components/layout/MainLayout';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Package, ArrowRight, RotateCcw, X, Search, Download } from 'lucide-react';
+import { Package, ArrowRight, RotateCcw, X, Search, Download } from '@/components/icons';
 import { Link } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { getReturnStatusLabel, getReturnStatusVariant, ReturnStatus } from '@/services/dataService';

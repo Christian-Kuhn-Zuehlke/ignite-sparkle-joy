@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { Package, Plus, Search, FolderOpen, FileQuestion } from 'lucide-react';
+import { Package, Plus, Search, FolderOpen, FileQuestion } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 

@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import { Palette, Save, RotateCcw, Loader2, Sparkles, Lightbulb, Wand2, Pipette } from 'lucide-react';
+import { Palette, Save, RotateCcw, Loader2, Sparkles, Lightbulb, Wand2, Pipette } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';

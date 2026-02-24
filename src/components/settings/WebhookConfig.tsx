@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Webhook, Plus, Trash2, Edit2, Loader2, TestTube } from 'lucide-react';
+import { Webhook, Plus, Trash2, Edit2, Loader2, TestTube } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';

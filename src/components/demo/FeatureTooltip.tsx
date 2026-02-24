@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { HelpCircle, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { HelpCircle, X, ChevronLeft, ChevronRight } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { DEMO_DATA } from '@/hooks/useDemoMode';
@@ -144,4 +144,4 @@ export function FeatureTour({ isOpen, onClose }: FeatureTourProps) {
 }
 
 // Import for the Sparkles icon used in FeatureTour
-import { Sparkles } from 'lucide-react';
+import { Sparkles } from '@/components/icons';

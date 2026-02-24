@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { Truck, Clock, CheckCircle2, AlertTriangle, TrendingUp, TrendingDown, ExternalLink } from 'lucide-react';
+import { Truck, Clock, CheckCircle2, AlertTriangle, TrendingUp, TrendingDown, ExternalLink } from '@/components/icons';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';

@@ -21,7 +21,7 @@ import {
   TrendingUp,
   Lightbulb,
   Clock,
-} from 'lucide-react';
+} from '@/components/icons';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/contexts/AuthContext';
 import { useBranding } from '@/contexts/BrandingContext';

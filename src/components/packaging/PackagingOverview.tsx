@@ -1,4 +1,4 @@
-import { Package, Truck, AlertTriangle, Leaf, TrendingDown, DollarSign } from 'lucide-react';
+import { Package, Truck, AlertTriangle, Leaf, TrendingDown, DollarSign } from '@/components/icons';
 import { Card, CardContent } from '@/components/ui/card';
 import { usePackagingStats } from '@/hooks/usePackagingIntelligence';
 import { Skeleton } from '@/components/ui/skeleton';

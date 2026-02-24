@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { MessageSquare, Send, Pin, Trash2, Loader2 } from 'lucide-react';
+import { MessageSquare, Send, Pin, Trash2, Loader2 } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';

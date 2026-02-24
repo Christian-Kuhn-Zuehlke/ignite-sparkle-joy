@@ -1,4 +1,4 @@
-import { Bell, Package, Truck, CheckCircle, AlertTriangle, RotateCcw, TestTube, Smartphone, Mail, MessageSquare, Phone } from 'lucide-react';
+import { Bell, Package, Truck, CheckCircle, AlertTriangle, RotateCcw, TestTube, Smartphone, Mail, MessageSquare, Phone } from '@/components/icons';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
 import { Button } from '@/components/ui/button';

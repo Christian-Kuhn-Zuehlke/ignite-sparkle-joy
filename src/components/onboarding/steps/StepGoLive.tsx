@@ -1,4 +1,4 @@
-import { Check, X, AlertTriangle, Rocket } from 'lucide-react';
+import { Check, X, AlertTriangle, Rocket } from '@/components/icons';
 import { OnboardingData } from '../OnboardingWizard';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';

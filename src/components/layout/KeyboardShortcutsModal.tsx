@@ -6,7 +6,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { getShortcutDisplay } from '@/hooks/useKeyboardShortcuts';
-import { Keyboard } from 'lucide-react';
+import { Keyboard } from '@/components/icons';
 
 interface ShortcutItem {
   keys: { key: string; ctrl?: boolean; shift?: boolean; alt?: boolean; meta?: boolean };

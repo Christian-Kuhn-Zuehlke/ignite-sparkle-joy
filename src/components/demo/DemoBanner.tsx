@@ -1,4 +1,4 @@
-import { Sparkles, Clock, ArrowRight, X } from 'lucide-react';
+import { Sparkles, Clock, ArrowRight, X } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';

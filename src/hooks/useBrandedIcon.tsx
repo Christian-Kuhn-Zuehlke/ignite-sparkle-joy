@@ -7,7 +7,7 @@ import {
   ShoppingBag,
   Leaf,
   TreePine,
-} from 'lucide-react';
+} from '@/components/icons';
 
 
 // ============================================

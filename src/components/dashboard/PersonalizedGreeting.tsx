@@ -3,7 +3,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useBranding } from '@/contexts/BrandingContext';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
-import { Sparkles, Award, Trophy, Zap, TrendingUp, Package, Truck, Star } from 'lucide-react';
+import { Sparkles, Award, Trophy, Zap, TrendingUp, Package, Truck, Star } from '@/components/icons';
 import { format } from 'date-fns';
 import { Card, CardContent } from '@/components/ui/card';
 import { cn } from '@/lib/utils';

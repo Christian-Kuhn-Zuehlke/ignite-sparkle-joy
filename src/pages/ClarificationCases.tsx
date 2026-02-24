@@ -19,7 +19,7 @@ import {
   Ban,
   PackageX,
   ClipboardList
-} from 'lucide-react';
+} from '@/components/icons';
 import { supabase } from '@/integrations/supabase/client';
 import { useEffectiveCompanyId } from '@/hooks/useEffectiveCompanyId';
 import { useAuth } from '@/contexts/AuthContext';
