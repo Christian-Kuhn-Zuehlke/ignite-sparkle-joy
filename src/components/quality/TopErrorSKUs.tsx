@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { AlertTriangle, Package } from 'lucide-react';
+import { AlertTriangle, Package } from '@/components/icons';
 
 interface TopErrorSKUsProps {
   skus: Array<{ sku: string; count: number; name?: string }>;

@@ -16,7 +16,7 @@ import {
   Sparkles,
   BarChart3,
   ArrowRight
-} from 'lucide-react';
+} from '@/components/icons';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
 import { cn } from '@/lib/utils';

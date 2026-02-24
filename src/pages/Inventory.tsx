@@ -1,6 +1,6 @@
 import { useState, useCallback, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Search, AlertTriangle, Package, X, Download, ChevronUp, ChevronDown, Edit2 } from 'lucide-react';
+import { Search, AlertTriangle, Package, X, Download, ChevronUp, ChevronDown, Edit2 } from '@/components/icons';
 import { MainLayout } from '@/components/layout/MainLayout';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';

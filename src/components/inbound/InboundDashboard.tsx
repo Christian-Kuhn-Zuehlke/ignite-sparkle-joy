@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { usePurchaseOrderStats } from '@/hooks/usePurchaseOrders';
-import { Package, Truck, Clock, AlertTriangle, CheckCircle, Loader2 } from 'lucide-react';
+import { Package, Truck, Clock, AlertTriangle, CheckCircle, Loader2 } from '@/components/icons';
 
 export function InboundDashboard() {
   const { t } = useLanguage();

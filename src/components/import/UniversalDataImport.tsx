@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
-import { Upload, FileText, Loader2, CheckCircle, AlertCircle, X, Package, ShoppingCart, RotateCcw, Layers, Clock, SkipForward, Play, ChevronDown } from 'lucide-react';
+import { Upload, FileText, Loader2, CheckCircle, AlertCircle, X, Package, ShoppingCart, RotateCcw, Layers, Clock, SkipForward, Play, ChevronDown } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import {
   Sheet,

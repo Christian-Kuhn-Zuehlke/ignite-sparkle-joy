@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Badge } from '@/components/ui/badge';
-import { Sparkles, Bug, Wrench, Plus } from 'lucide-react';
+import { Sparkles, Bug, Wrench, Plus } from '@/components/icons';
 import { parseISO, isAfter, differenceInDays } from 'date-fns';
 
 const LAST_SEEN_DATE_KEY = 'msdirect-last-seen-changelog-date';

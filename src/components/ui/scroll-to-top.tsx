@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { ArrowUp } from 'lucide-react';
+import { ArrowUp } from '@/components/icons';
 import { cn } from '@/lib/utils';
 
 interface ScrollToTopProps {

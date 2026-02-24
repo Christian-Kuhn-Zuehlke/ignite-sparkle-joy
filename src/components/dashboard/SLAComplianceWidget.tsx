@@ -1,4 +1,4 @@
-import { Clock, AlertTriangle, CheckCircle2, XCircle, Loader2 } from 'lucide-react';
+import { Clock, AlertTriangle, CheckCircle2, XCircle, Loader2 } from '@/components/icons';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useSLACompliance } from '@/hooks/useSLACompliance';
 import { Progress } from '@/components/ui/progress';

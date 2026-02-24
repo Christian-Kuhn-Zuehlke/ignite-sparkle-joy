@@ -1,4 +1,4 @@
-import { Bell, Package, AlertTriangle, CheckCircle, Clock, UserPlus } from 'lucide-react';
+import { Bell, Package, AlertTriangle, CheckCircle, Clock, UserPlus } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import {
   Popover,

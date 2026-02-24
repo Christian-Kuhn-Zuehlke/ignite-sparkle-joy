@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
-import { TrendingUp, TrendingDown, Minus, Target, AlertTriangle, CheckCircle } from 'lucide-react';
+import { TrendingUp, TrendingDown, Minus, Target, AlertTriangle, CheckCircle } from '@/components/icons';
 import { cn } from '@/lib/utils';
 
 interface QualityScoreCardProps {

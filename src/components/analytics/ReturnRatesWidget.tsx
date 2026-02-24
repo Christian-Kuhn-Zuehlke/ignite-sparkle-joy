@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { TrendingDown, TrendingUp, Package, AlertTriangle, ExternalLink } from 'lucide-react';
+import { TrendingDown, TrendingUp, Package, AlertTriangle, ExternalLink } from '@/components/icons';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';

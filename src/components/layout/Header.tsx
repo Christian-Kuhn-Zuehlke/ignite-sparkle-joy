@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { HelpCircle, Menu, Package, Sparkles, Search } from 'lucide-react';
+import { HelpCircle, Menu, Package, Sparkles, Search } from '@/components/icons';
 
 import { Button } from '@/components/ui/button';
 import { useBranding } from '@/contexts/BrandingContext';

@@ -24,7 +24,7 @@ import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useCreatePurchaseOrder } from '@/hooks/usePurchaseOrders';
 import { useAuth } from '@/contexts/AuthContext';
-import { Loader2, Upload, Plus, Trash2 } from 'lucide-react';
+import { Loader2, Upload, Plus, Trash2 } from '@/components/icons';
 import { toast } from 'sonner';
 
 const poSchema = z.object({

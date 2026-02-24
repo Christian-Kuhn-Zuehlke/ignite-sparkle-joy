@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { ToggleLeft, Loader2, Plus, Navigation, Plug, Link2 } from 'lucide-react';
+import { ToggleLeft, Loader2, Plus, Navigation, Plug, Link2 } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { Badge } from '@/components/ui/badge';

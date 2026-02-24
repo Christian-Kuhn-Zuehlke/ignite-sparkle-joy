@@ -1,7 +1,6 @@
-import { Palette, Target, Shield, Globe, Settings2, Languages } from 'lucide-react';
+import { Palette, Target, Shield, Globe, Settings2, Languages, Building2 } from '@/components/icons';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Label } from '@/components/ui/label';
-import { Building2 } from 'lucide-react';
 import {
   Select,
   SelectContent,

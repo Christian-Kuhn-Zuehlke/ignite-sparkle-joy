@@ -9,7 +9,7 @@ import {
   TrendingUp,
   ChevronRight,
   Sparkles
-} from 'lucide-react';
+} from '@/components/icons';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { cn } from '@/lib/utils';

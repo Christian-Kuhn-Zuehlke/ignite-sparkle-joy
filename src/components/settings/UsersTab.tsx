@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Users, Search, Loader2, Clock } from 'lucide-react';
+import { Users, Search, Loader2, Clock } from '@/components/icons';
 import { formatDistanceToNow, Locale } from 'date-fns';
 import { de, enUS, fr, it, es } from 'date-fns/locale';
 import { Input } from '@/components/ui/input';

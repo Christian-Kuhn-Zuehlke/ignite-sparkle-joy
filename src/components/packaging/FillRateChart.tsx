@@ -5,7 +5,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { ComposedChart, Area, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { format, parseISO } from 'date-fns';
 import { de, enUS } from 'date-fns/locale';
-import { TrendingUp } from 'lucide-react';
+import { TrendingUp } from '@/components/icons';
 
 interface FillRateChartProps {
   days?: number;

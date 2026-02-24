@@ -13,7 +13,7 @@ import {
   Eye,
   Users,
   AlertCircle
-} from 'lucide-react';
+} from '@/components/icons';
 import { toast } from 'sonner';
 import { useLanguage } from '@/contexts/LanguageContext';
 

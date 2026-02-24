@@ -7,7 +7,7 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
-import { Trash2, AlertTriangle } from 'lucide-react';
+import { Trash2, AlertTriangle } from '@/components/icons';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 export function DeleteAccountSection() {

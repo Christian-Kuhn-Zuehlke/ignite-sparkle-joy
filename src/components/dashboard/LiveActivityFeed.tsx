@@ -14,7 +14,7 @@ import {
   Clock,
   ArrowRight,
   Zap
-} from 'lucide-react';
+} from '@/components/icons';
 import { formatDistanceToNow } from 'date-fns';
 import { de, enGB, fr, it, es } from 'date-fns/locale';
 import { cn } from '@/lib/utils';

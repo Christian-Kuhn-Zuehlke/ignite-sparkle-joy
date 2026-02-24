@@ -8,7 +8,7 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import { supabase } from '@/integrations/supabase/client';
 import { useEffectiveCompanyId } from '@/hooks/useEffectiveCompanyId';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { TrendingUp, Calendar, ArrowUp, ArrowDown, Minus } from 'lucide-react';
+import { TrendingUp, Calendar, ArrowUp, ArrowDown, Minus } from '@/components/icons';
 
 interface MonthlyData {
   month: string;

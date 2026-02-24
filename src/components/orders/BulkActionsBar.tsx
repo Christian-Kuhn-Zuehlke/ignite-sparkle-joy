@@ -1,4 +1,4 @@
-import { X, CheckSquare, Loader2 } from 'lucide-react';
+import { X, CheckSquare, Loader2 } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,

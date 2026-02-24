@@ -9,7 +9,7 @@ import {
   Copy,
   ArrowLeft,
   RefreshCw,
-} from 'lucide-react';
+} from '@/components/icons';
 import { MainLayout } from '@/components/layout/MainLayout';
 import { OrderTimeline } from '@/components/orders/OrderTimeline';
 import { OrderNotes } from '@/components/orders/OrderNotes';

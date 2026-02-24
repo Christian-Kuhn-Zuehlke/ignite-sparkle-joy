@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { MessageCircle, Send, X, Bot, User, Loader2, Sparkles } from 'lucide-react';
+import { MessageCircle, Send, X, Bot, User, Loader2, Sparkles } from '@/components/icons';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useChatbotStream, ChatMessage } from '@/hooks/useChatbotStream';
 import { cn } from '@/lib/utils';

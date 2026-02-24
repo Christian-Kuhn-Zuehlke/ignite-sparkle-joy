@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Users, Building2, Plus, Settings2, Bell, Search, Edit2, Loader2, LayoutDashboard, Wrench, User } from 'lucide-react';
+import { Users, Building2, Plus, Settings2, Bell, Search, Edit2, Loader2, LayoutDashboard, Wrench, User } from '@/components/icons';
 import { MainLayout } from '@/components/layout/MainLayout';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';

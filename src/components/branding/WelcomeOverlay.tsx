@@ -5,7 +5,7 @@ import {
   ArrowRight, Package, Truck, AlertTriangle, CheckCircle, 
   Users, Building2, Clock, TrendingUp, UserPlus, ShieldAlert,
   BarChart3
-} from 'lucide-react';
+} from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
 import { format } from 'date-fns';

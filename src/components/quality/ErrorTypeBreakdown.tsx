@@ -9,7 +9,7 @@ import {
   Truck,
   HelpCircle,
   MinusCircle
-} from 'lucide-react';
+} from '@/components/icons';
 import { QualityErrorType, getErrorTypeLabel } from '@/hooks/useQualityIntelligence';
 
 interface ErrorTypeBreakdownProps {

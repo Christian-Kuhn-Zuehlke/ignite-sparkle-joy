@@ -13,7 +13,7 @@ import {
   ArrowDownRight,
   Minus,
   CalendarDays
-} from 'lucide-react';
+} from '@/components/icons';
 import { format, subMonths, startOfMonth, endOfMonth, startOfYear, subQuarters, startOfQuarter, endOfQuarter, subWeeks, startOfWeek, endOfWeek } from 'date-fns';
 import { MainLayout } from '@/components/layout/MainLayout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';

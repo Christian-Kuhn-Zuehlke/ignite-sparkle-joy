@@ -18,7 +18,7 @@ import {
   Search,
   Filter,
   ExternalLink
-} from 'lucide-react';
+} from '@/components/icons';
 import { format, parseISO } from 'date-fns';
 import { de } from 'date-fns/locale';
 import { QualityError, getErrorTypeLabel } from '@/hooks/useQualityIntelligence';

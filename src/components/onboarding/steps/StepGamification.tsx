@@ -2,7 +2,7 @@ import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Slider } from '@/components/ui/slider';
 import { OnboardingData } from '../OnboardingWizard';
-import { PartyPopper, Trophy, Target, Bell, Sparkles } from 'lucide-react';
+import { PartyPopper, Trophy, Target, Bell, Sparkles } from '@/components/icons';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useLanguage } from '@/contexts/LanguageContext';
 

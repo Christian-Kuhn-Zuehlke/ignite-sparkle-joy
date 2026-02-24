@@ -1,4 +1,4 @@
-import { Upload, Trash2, History } from 'lucide-react';
+import { Upload, Trash2, History } from '@/components/icons';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { AuditLogViewer } from './AuditLogViewer';
 import { XmlImport } from './XmlImport';

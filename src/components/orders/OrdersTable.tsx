@@ -1,7 +1,7 @@
 import { useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useVirtualizer } from '@tanstack/react-virtual';
-import { ExternalLink, ChevronRight, MapPin, Calendar, Package, ArrowUp, ArrowDown, ChevronsUpDown } from 'lucide-react';
+import { ExternalLink, ChevronRight, MapPin, Calendar, Package, ArrowUp, ArrowDown, ChevronsUpDown } from '@/components/icons';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Order, getStatusColor, getStatusLabel } from '@/services/dataService';

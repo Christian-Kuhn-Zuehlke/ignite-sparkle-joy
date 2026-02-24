@@ -11,7 +11,7 @@ import {
   ExternalLink,
   Check,
   AlertCircle
-} from 'lucide-react';
+} from '@/components/icons';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 interface StepIntegrationsProps {

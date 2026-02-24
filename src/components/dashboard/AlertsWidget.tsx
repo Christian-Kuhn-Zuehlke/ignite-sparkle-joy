@@ -1,4 +1,4 @@
-import { AlertTriangle, Clock, Package, AlertCircle } from 'lucide-react';
+import { AlertTriangle, Clock, Package, AlertCircle } from '@/components/icons';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/contexts/LanguageContext';
 

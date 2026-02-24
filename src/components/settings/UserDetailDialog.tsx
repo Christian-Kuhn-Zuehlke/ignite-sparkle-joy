@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { User, Building2, Shield, Calendar, Mail, Users, Star, Loader2, Check, X, Trash2 } from 'lucide-react';
+import { User, Building2, Shield, Calendar, Mail, Users, Star, Loader2, Check, X, Trash2 } from '@/components/icons';
 import {
   Dialog,
   DialogContent,

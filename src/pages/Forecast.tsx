@@ -17,7 +17,7 @@ import {
   XCircle,
   Clock,
   Target
-} from 'lucide-react';
+} from '@/components/icons';
 import { SeasonalTrendsWidget } from '@/components/analytics/SeasonalTrendsWidget';
 import { supabase } from '@/integrations/supabase/client';
 import { useEffectiveCompanyId } from '@/hooks/useEffectiveCompanyId';

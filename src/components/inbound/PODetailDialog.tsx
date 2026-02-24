@@ -28,7 +28,7 @@ import {
   FileText,
   Play,
   CheckCircle,
-} from 'lucide-react';
+} from '@/components/icons';
 import { useAuth } from '@/contexts/AuthContext';
 import { ReceivingDialog } from './ReceivingDialog';
 

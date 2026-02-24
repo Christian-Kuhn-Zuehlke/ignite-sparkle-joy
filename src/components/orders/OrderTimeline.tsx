@@ -1,4 +1,4 @@
-import { Check, Circle } from 'lucide-react';
+import { Check, Circle } from '@/components/icons';
 import { cn } from '@/lib/utils';
 import { OrderStatus } from '@/services/dataService';
 import { useBrandedIcons } from '@/hooks/useBrandedIcon';

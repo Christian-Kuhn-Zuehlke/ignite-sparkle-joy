@@ -10,7 +10,7 @@ import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, L
 import { supabase } from '@/integrations/supabase/client';
 import { useEffectiveCompanyId } from '@/hooks/useEffectiveCompanyId';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Truck, Clock, AlertTriangle, CheckCircle, Download } from 'lucide-react';
+import { Truck, Clock, AlertTriangle, CheckCircle, Download } from '@/components/icons';
 import { exportToCSV, CARRIER_EXPORT_COLUMNS } from '@/lib/exportUtils';
 import { toast } from 'sonner';
 

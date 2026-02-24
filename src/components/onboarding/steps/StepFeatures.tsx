@@ -16,7 +16,7 @@ import {
   Lightbulb,
   CheckCircle2,
   Loader2
-} from 'lucide-react';
+} from '@/components/icons';
 import { cn } from '@/lib/utils';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';

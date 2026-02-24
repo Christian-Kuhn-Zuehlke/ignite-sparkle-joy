@@ -1,7 +1,7 @@
 import { useState, useCallback, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
-import { Search, Download, ArrowUp, ArrowDown, X, Loader2 } from 'lucide-react';
+import { Search, Download, ArrowUp, ArrowDown, X, Loader2 } from '@/components/icons';
 import { MainLayout } from '@/components/layout/MainLayout';
 import { OrdersTable, SortField, SortDirection } from '@/components/orders/OrdersTable';
 import { OrdersPagination } from '@/components/orders/OrdersPagination';

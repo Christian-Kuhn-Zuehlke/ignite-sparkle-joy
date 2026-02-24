@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Globe, Loader2 } from 'lucide-react';
+import { Globe, Loader2 } from '@/components/icons';
 import { Label } from '@/components/ui/label';
 import {
   Select,
