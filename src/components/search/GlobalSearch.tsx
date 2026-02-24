@@ -97,7 +97,7 @@ export function GlobalSearch({ open, onOpenChange }: GlobalSearchProps) {
             id: order.id,
             type: 'order',
             title: `#${order.source_no}`,
-            subtitle: order.ship_to_name,
+            subtitle: order.ship_to_name || undefined,
             status: order.status,
             url: `/orders/${order.id}`,
           });

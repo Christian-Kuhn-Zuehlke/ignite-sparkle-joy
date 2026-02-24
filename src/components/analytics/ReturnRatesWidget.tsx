@@ -100,15 +100,17 @@ export function ReturnRatesWidget() {
       // Aggregate returns by SKU
       const returnsBySku = new Map<string, { name: string; count: number }>();
       for (const line of (returnsRes.data || [])) {
-        const existing = returnsBySku.get(line.sku) || { name: line.name, count: 0 };
-        existing.count += line.quantity;
-        returnsBySku.set(line.sku, existing);
+        const sku = line.sku || '';
+        const existing = returnsBySku.get(sku) || { name: line.name || '', count: 0 };
+        existing.count += line.quantity || 0;
+        returnsBySku.set(sku, existing);
       }
 
       // Aggregate orders by SKU
       const ordersBySku = new Map<string, number>();
       for (const line of (ordersRes.data || [])) {
-        ordersBySku.set(line.sku, (ordersBySku.get(line.sku) || 0) + line.quantity);
+        const sku = line.sku || '';
+        ordersBySku.set(sku, (ordersBySku.get(sku) || 0) + (line.quantity || 0));
       }
 
       // Calculate return rates

@@ -68,7 +68,8 @@ export function InventoryTurnoverWidget() {
       // Aggregate sales by SKU
       const salesBySku = new Map<string, number>();
       for (const line of (salesRes.data || [])) {
-        salesBySku.set(line.sku, (salesBySku.get(line.sku) || 0) + line.quantity);
+        const sku = line.sku || '';
+        salesBySku.set(sku, (salesBySku.get(sku) || 0) + (line.quantity || 0));
       }
 
       // Calculate turnover metrics
@@ -83,20 +84,20 @@ export function InventoryTurnoverWidget() {
         
         // Turnover rate = (Annual sales / Average inventory)
         // Simplified: (soldLast30Days * 12) / onHand
-        const turnoverRate = item.on_hand > 0 
-          ? (soldLast30Days * 12) / item.on_hand 
+        const onHand = item.on_hand ?? 0;
+        const turnoverRate = onHand > 0 
+          ? (soldLast30Days * 12) / onHand 
           : 0;
         
-        // Days of supply = Current stock / Daily sales rate
         const daysOfSupply = dailySales > 0 
-          ? Math.round(item.on_hand / dailySales) 
-          : (item.on_hand > 0 ? 999 : 0);
+          ? Math.round(onHand / dailySales) 
+          : (onHand > 0 ? 999 : 0);
 
-        if (item.on_hand > 0) {
+        if (onHand > 0) {
           skuMetrics.push({
             sku: item.sku,
-            name: item.name,
-            onHand: item.on_hand,
+            name: item.name || '',
+            onHand: onHand,
             soldLast30Days,
             turnoverRate,
             daysOfSupply: Math.min(daysOfSupply, 365)

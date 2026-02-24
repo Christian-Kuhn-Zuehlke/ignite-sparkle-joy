@@ -1,4 +1,4 @@
-import { Calendar, ChevronDown, X } from 'lucide-react';
+import { Calendar, ChevronDown, X } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,

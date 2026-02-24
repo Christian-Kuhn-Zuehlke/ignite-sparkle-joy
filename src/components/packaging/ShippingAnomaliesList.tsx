@@ -1,4 +1,4 @@
-import { AlertTriangle, Check, ExternalLink, Package, Truck, Scale, Ruler } from '@/components/icons';
+import { AlertTriangle, Check, ExternalLink, Package, Truck, Scale, Ruler, type LucideIcon } from '@/components/icons';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -8,7 +8,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
 
-const anomalyIcons: Record<string, typeof AlertTriangle> = {
+const anomalyIcons: Record<string, LucideIcon> = {
   expensive_carrier: Truck,
   wrong_service: Truck,
   weight_mismatch: Scale,

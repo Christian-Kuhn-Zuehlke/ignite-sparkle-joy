@@ -141,8 +141,8 @@ export function IntegrationConfig({ companyId, companyName }: IntegrationConfigP
   const fetchIntegrations = async () => {
     try {
       setLoading(true);
-      const { data, error } = await supabase
-        .from('integrations')
+      const { data, error } = await (supabase
+        .from as any)('integrations')
         .select('*')
         .eq('company_id', companyId)
         .order('name', { ascending: true });
@@ -184,8 +184,8 @@ export function IntegrationConfig({ companyId, companyName }: IntegrationConfigP
       setSaving(true);
 
       if (editingIntegration) {
-        const { error } = await supabase
-          .from('integrations')
+        const { error } = await (supabase
+          .from as any)('integrations')
           .update({
             config: configForm,
           })
@@ -200,8 +200,8 @@ export function IntegrationConfig({ companyId, companyName }: IntegrationConfigP
         );
         toast.success(t('integrations.updated'));
       } else {
-        const { data, error } = await supabase
-          .from('integrations')
+        const { data, error } = await (supabase
+          .from as any)('integrations')
           .insert({
             company_id: companyId,
             type: selectedType.type,
@@ -220,7 +220,7 @@ export function IntegrationConfig({ companyId, companyName }: IntegrationConfigP
           throw error;
         }
 
-        setIntegrations((prev) => [...prev, data as Integration]);
+        setIntegrations((prev) => [...prev, data as any as Integration]);
         toast.success(t('integrations.created'));
       }
 
@@ -235,8 +235,8 @@ export function IntegrationConfig({ companyId, companyName }: IntegrationConfigP
 
   const handleToggleActive = async (integration: Integration) => {
     try {
-      const { error } = await supabase
-        .from('integrations')
+      const { error } = await (supabase
+        .from as any)('integrations')
         .update({ is_active: !integration.is_active })
         .eq('id', integration.id);
 
@@ -264,8 +264,8 @@ export function IntegrationConfig({ companyId, companyName }: IntegrationConfigP
       // Simulate sync - in real app this would call an edge function
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
-      const { error } = await supabase
-        .from('integrations')
+      const { error } = await (supabase
+        .from as any)('integrations')
         .update({
           last_sync_at: new Date().toISOString(),
           last_sync_status: 'success',

@@ -1,4 +1,4 @@
-import { Lightbulb, ArrowDown, ArrowUp, Leaf, Truck, Layers, Check, TrendingUp } from 'lucide-react';
+import { Lightbulb, ArrowDown, ArrowUp, Leaf, Truck, Layers, Check, TrendingUp, type LucideIcon } from '@/components/icons';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -8,7 +8,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { toast } from 'sonner';
 
-const typeIcons: Record<string, typeof Lightbulb> = {
+const typeIcons: Record<string, LucideIcon> = {
   downsize: ArrowDown,
   upsize: ArrowUp,
   eco_switch: Leaf,

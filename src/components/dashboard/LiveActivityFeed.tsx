@@ -124,34 +124,34 @@ export function LiveActivityFeed() {
             id: `${order.id}-shipped`,
             type: 'order_shipped',
             messageKey: 'activity.orderShipped',
-            messageParams: { orderNo: order.source_no },
+            messageParams: { orderNo: order.source_no || '' },
             timestamp: statusDate,
-            meta: { orderId: order.id, customerName: order.ship_to_name },
+            meta: { orderId: order.id, customerName: order.ship_to_name || undefined },
           });
         } else if (order.status === 'delivered') {
           activities.push({
             id: `${order.id}-delivered`,
             type: 'order_delivered',
             messageKey: 'activity.orderDelivered',
-            messageParams: { orderNo: order.source_no, customerName: order.ship_to_name },
+            messageParams: { orderNo: order.source_no || '', customerName: order.ship_to_name || '' },
             timestamp: statusDate,
-            meta: { orderId: order.id, customerName: order.ship_to_name },
+            meta: { orderId: order.id, customerName: order.ship_to_name || undefined },
           });
         } else if (createdAt >= new Date(twoHoursAgo)) {
           activities.push({
             id: `${order.id}-created`,
             type: 'order_created',
             messageKey: 'activity.newOrder',
-            messageParams: { orderNo: order.source_no },
+            messageParams: { orderNo: order.source_no || '' },
             timestamp: createdAt,
-            meta: { orderId: order.id, customerName: order.ship_to_name },
+            meta: { orderId: order.id, customerName: order.ship_to_name || undefined },
           });
         } else {
           activities.push({
             id: `${order.id}-status`,
             type: 'status_changed',
             messageKey: 'activity.statusChanged',
-            messageParams: { orderNo: order.source_no, status: order.status },
+            messageParams: { orderNo: order.source_no || '', status: order.status },
             timestamp: statusDate,
             meta: { orderId: order.id, status: order.status },
           });

@@ -221,7 +221,7 @@ export const OrderAnalyticsWidget = ({ companyId }: OrderAnalyticsWidgetProps) =
         }
         
         ordersData?.forEach(order => {
-          const date = parseISO(order.order_date);
+          const date = parseISO(order.order_date || '');
           const dayIndex = getDay(date);
           dayStats[dayIndex].orders++;
         });
@@ -282,8 +282,8 @@ export const OrderAnalyticsWidget = ({ companyId }: OrderAnalyticsWidgetProps) =
         });
         
         ordersData?.forEach(order => {
-          const key = order.order_date;
-          if (dailyStats[key]) {
+          const key = order.order_date || '';
+          if (key && dailyStats[key]) {
             dailyStats[key].orders++;
           }
         });

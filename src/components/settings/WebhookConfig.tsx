@@ -98,8 +98,8 @@ export function WebhookConfig({ companyId, companyName }: WebhookConfigProps) {
   const fetchWebhooks = async () => {
     try {
       setLoading(true);
-      const { data, error } = await supabase
-        .from('webhooks')
+      const { data, error } = await (supabase
+        .from as any)('webhooks')
         .select('*')
         .eq('company_id', companyId)
         .order('created_at', { ascending: false });
@@ -160,8 +160,8 @@ export function WebhookConfig({ companyId, companyName }: WebhookConfigProps) {
       setSaving(true);
 
       if (editingWebhook) {
-        const { error } = await supabase
-          .from('webhooks')
+        const { error } = await (supabase
+          .from as any)('webhooks')
           .update({
             name: form.name,
             url: form.url,
@@ -181,8 +181,8 @@ export function WebhookConfig({ companyId, companyName }: WebhookConfigProps) {
         );
         toast.success(t('webhooks.saved'));
       } else {
-        const { data, error } = await supabase
-          .from('webhooks')
+        const { data, error } = await (supabase
+          .from as any)('webhooks')
           .insert({
             company_id: companyId,
             name: form.name,
@@ -212,8 +212,8 @@ export function WebhookConfig({ companyId, companyName }: WebhookConfigProps) {
     if (!webhookToDelete) return;
 
     try {
-      const { error } = await supabase
-        .from('webhooks')
+      const { error } = await (supabase
+        .from as any)('webhooks')
         .delete()
         .eq('id', webhookToDelete.id);
 
@@ -232,8 +232,8 @@ export function WebhookConfig({ companyId, companyName }: WebhookConfigProps) {
 
   const handleToggleActive = async (webhook: WebhookData) => {
     try {
-      const { error } = await supabase
-        .from('webhooks')
+      const { error } = await (supabase
+        .from as any)('webhooks')
         .update({ is_active: !webhook.is_active })
         .eq('id', webhook.id);
 
