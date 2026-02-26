@@ -12,15 +12,15 @@ export function InboundDashboard() {
       title: t('inbound.kpi.expectedToday'),
       value: stats?.expectedToday ?? 0,
       icon: Clock,
-      color: 'text-blue-500',
-      bgColor: 'bg-blue-500/10',
+      color: 'text-primary',
+      bgColor: 'bg-primary/10',
     },
     {
       title: t('inbound.kpi.arrivedNotReceived'),
       value: stats?.arrivedNotReceived ?? 0,
       icon: Truck,
-      color: 'text-amber-500',
-      bgColor: 'bg-amber-500/10',
+      color: 'text-warning',
+      bgColor: 'bg-warning-bg',
     },
     {
       title: t('inbound.kpi.inProgress'),
@@ -34,14 +34,14 @@ export function InboundDashboard() {
       value: stats?.discrepancies ?? 0,
       icon: AlertTriangle,
       color: 'text-destructive',
-      bgColor: 'bg-destructive/10',
+      bgColor: 'bg-destructive-bg',
     },
     {
       title: t('inbound.kpi.completedThisWeek'),
       value: stats?.completedThisWeek ?? 0,
       icon: CheckCircle,
-      color: 'text-green-500',
-      bgColor: 'bg-green-500/10',
+      color: 'text-success',
+      bgColor: 'bg-success-bg',
     },
   ];
 

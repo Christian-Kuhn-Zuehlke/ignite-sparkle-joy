@@ -271,13 +271,13 @@ const visibleAlerts = alerts.filter(a => !dismissedAlerts.has(a.id));
   const getSeverityStyles = (severity: string) => {
     switch (severity) {
       case 'critical':
-        return 'bg-destructive/10 border-destructive/30 hover:bg-destructive/15';
+        return 'bg-destructive-bg border-destructive/30 hover:bg-destructive/15';
       case 'warning':
-        return 'bg-amber-500/10 border-amber-500/30 hover:bg-amber-500/15';
+        return 'bg-warning-bg border-warning/30 hover:bg-warning/15';
       case 'success':
-        return 'bg-green-500/10 border-green-500/30 hover:bg-green-500/15';
+        return 'bg-success-bg border-success/30 hover:bg-success/15';
       default:
-        return 'bg-blue-500/10 border-blue-500/30 hover:bg-blue-500/15';
+        return 'bg-primary/10 border-primary/30 hover:bg-primary/15';
     }
   };
 
@@ -286,11 +286,11 @@ const visibleAlerts = alerts.filter(a => !dismissedAlerts.has(a.id));
       case 'critical':
         return 'bg-destructive/20 text-destructive';
       case 'warning':
-        return 'bg-amber-500/20 text-amber-600 dark:text-amber-400';
+        return 'bg-warning/20 text-warning-emphasis';
       case 'success':
-        return 'bg-green-500/20 text-green-600 dark:text-green-400';
+        return 'bg-success/20 text-success';
       default:
-        return 'bg-blue-500/20 text-blue-600 dark:text-blue-400';
+        return 'bg-primary/20 text-primary';
     }
   };
 
@@ -316,19 +316,19 @@ const visibleAlerts = alerts.filter(a => !dismissedAlerts.has(a.id));
       <CardHeader className="pb-3 bg-gradient-to-r from-primary/5 to-accent/5 border-b border-border/50">
         <CardTitle className="flex items-center justify-between text-base font-semibold">
           <div className="flex items-center gap-2">
-            <div className="p-1.5 rounded-lg bg-gradient-to-br from-rose-500/20 to-pink-500/20">
-              <Bell className="h-4 w-4 text-rose-500" />
+            <div className="p-1.5 rounded-lg bg-gradient-to-br from-destructive/20 to-destructive/10">
+              <Bell className="h-4 w-4 text-destructive" />
             </div>
             {t('smartAlerts.title')}
           </div>
           <div className="flex gap-1.5">
             {successCount > 0 && (
-              <Badge variant="outline" className="text-xs px-2 py-0.5 text-green-600 border-green-500/50 bg-green-500/10">
+              <Badge variant="outline" className="text-xs px-2 py-0.5 text-success border-success/50 bg-success-bg">
                 {successCount} ↑
               </Badge>
             )}
             {warningCount > 0 && (
-              <Badge variant="outline" className="text-xs px-2 py-0.5 text-amber-600 border-amber-500/50 bg-amber-500/10">
+              <Badge variant="outline" className="text-xs px-2 py-0.5 text-warning-emphasis border-warning/50 bg-warning-bg">
                 {warningCount}
               </Badge>
             )}
@@ -343,8 +343,8 @@ const visibleAlerts = alerts.filter(a => !dismissedAlerts.has(a.id));
       <CardContent className="p-0">
         {visibleAlerts.length === 0 || (visibleAlerts.length === 1 && visibleAlerts[0].id === 'all_good') ? (
           <div className="text-center py-8 px-4">
-            <div className="w-12 h-12 rounded-full bg-green-500/10 flex items-center justify-center mx-auto mb-3">
-              <CheckCircle2 className="h-6 w-6 text-green-500" />
+            <div className="w-12 h-12 rounded-full bg-success-bg flex items-center justify-center mx-auto mb-3">
+              <CheckCircle2 className="h-6 w-6 text-success" />
             </div>
             <p className="text-sm font-medium text-foreground">{t('smartAlerts.allGood')}</p>
             <p className="text-xs text-muted-foreground mt-1">{t('smartAlerts.allGoodDesc')}</p>
@@ -374,8 +374,8 @@ const visibleAlerts = alerts.filter(a => !dismissedAlerts.has(a.id));
                         <div className="flex items-center justify-between gap-2">
                           <span className="font-medium text-sm text-foreground truncate flex items-center gap-1.5">
                             {alert.title}
-                            {alert.trend === 'up' && <TrendingUp className="h-3 w-3 text-green-500" />}
-                            {alert.trend === 'down' && <TrendingDown className="h-3 w-3 text-red-500" />}
+                            {alert.trend === 'up' && <TrendingUp className="h-3 w-3 text-success" />}
+                            {alert.trend === 'down' && <TrendingDown className="h-3 w-3 text-destructive" />}
                           </span>
                           <div className="flex items-center gap-1.5">
                             {alert.count && (
