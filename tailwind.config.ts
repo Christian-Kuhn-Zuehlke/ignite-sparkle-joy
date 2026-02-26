@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Ubuntu', 'Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-        heading: ['Ubuntu', 'Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        sans: ['Ubuntu', 'Inter', 'Roboto', 'Segoe UI', 'system-ui', 'sans-serif'],
+        heading: ['Ubuntu', 'Inter', 'Roboto', 'Segoe UI', 'system-ui', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -36,6 +36,7 @@ export default {
           foreground: "hsl(var(--destructive-foreground))",
           emphasis: "hsl(var(--destructive-emphasis))",
           subtle: "hsl(var(--destructive-subtle))",
+          bg: "hsl(var(--destructive-bg))",
         },
         muted: {
           DEFAULT: "hsl(var(--muted))",
@@ -70,12 +71,14 @@ export default {
           foreground: "hsl(var(--success-foreground))",
           emphasis: "hsl(var(--success-emphasis))",
           subtle: "hsl(var(--success-subtle))",
+          bg: "hsl(var(--success-bg))",
         },
         warning: {
           DEFAULT: "hsl(var(--warning))",
           foreground: "hsl(var(--warning-foreground))",
           emphasis: "hsl(var(--warning-emphasis))",
           subtle: "hsl(var(--warning-subtle))",
+          bg: "hsl(var(--warning-bg))",
         },
         status: {
           shipped: "hsl(var(--status-shipped))",
@@ -87,12 +90,13 @@ export default {
       },
       borderRadius: {
         lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        md: "var(--radius-sm)",
+        sm: "calc(var(--radius-sm) - 2px)",
       },
       boxShadow: {
-        'card': 'var(--shadow-card)',
-        'elevated': 'var(--shadow-lg)',
+        'card': 'var(--shadow-1)',
+        'elevated': 'var(--shadow-2)',
+        'modal': 'var(--shadow-3)',
       },
       keyframes: {
         "accordion-down": {

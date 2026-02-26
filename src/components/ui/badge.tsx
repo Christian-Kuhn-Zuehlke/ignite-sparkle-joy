@@ -4,20 +4,23 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const badgeVariants = cva(
-  "inline-flex items-center rounded-full border-0 px-2.5 py-0.5 text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring/40",
+  "inline-flex items-center rounded-md px-2 py-1 text-sm font-bold transition-colors focus:outline-none focus:ring-2 focus:ring-ring/40",
   {
     variants: {
       variant: {
-        default: "bg-primary/15 text-primary",
-        secondary: "bg-secondary/15 text-secondary",
-        destructive: "bg-destructive/15 text-destructive",
+        default: "bg-background text-primary border border-primary/20",
+        secondary: "bg-muted text-foreground",
+        destructive: "bg-destructive-bg text-destructive-emphasis",
+        success: "bg-success-bg text-success-emphasis",
+        warning: "bg-warning-bg text-warning-emphasis",
+        info: "bg-background text-primary",
         outline: "border border-border text-foreground",
         // Status variants for fulfillment
-        shipped: "bg-status-shipped/15 text-status-shipped",
-        processing: "bg-status-processing/15 text-status-processing",
-        pending: "bg-status-pending/15 text-status-pending",
-        exception: "bg-status-exception/15 text-status-exception",
-        return: "bg-status-return/15 text-status-return",
+        shipped: "bg-success-bg text-success-emphasis",
+        processing: "bg-background text-primary",
+        pending: "bg-warning-bg text-warning-emphasis",
+        exception: "bg-destructive-bg text-destructive-emphasis",
+        return: "bg-muted text-subtitle",
       },
     },
     defaultVariants: {
