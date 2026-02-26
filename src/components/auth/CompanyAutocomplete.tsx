@@ -31,7 +31,7 @@ export function CompanyAutocomplete({
   const [isLoading, setIsLoading] = useState(false);
   const [noMatch, setNoMatch] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const debounceRef = useRef<NodeJS.Timeout>();
+  const debounceRef = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -130,7 +130,7 @@ export function CompanyAutocomplete({
           <Loader2 className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 animate-spin text-muted-foreground" />
         )}
         {selectedCompanyId && !isLoading && (
-          <Check className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-green-500" />
+          <Check className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-success" />
         )}
       </div>
 
@@ -163,7 +163,7 @@ export function CompanyAutocomplete({
             </ul>
           ) : noMatch && value.length >= 2 ? (
             <div className="p-3 text-sm">
-              <div className="flex items-center gap-2 text-amber-600">
+              <div className="flex items-center gap-2 text-warning-emphasis">
                 <AlertCircle className="h-4 w-4" />
                 <span>Kein Unternehmen gefunden</span>
               </div>
@@ -180,13 +180,13 @@ export function CompanyAutocomplete({
       )}
       
       {!selectedCompanyId && value.length >= 2 && noMatch && !isOpen && (
-        <p className="text-xs text-amber-600">
+        <p className="text-xs text-warning-emphasis">
           Unbekanntes Unternehmen – Ihre Registrierung wird von einem Admin geprüft.
         </p>
       )}
       
       {selectedCompanyId && (
-        <p className="text-xs text-green-600">
+        <p className="text-xs text-success">
           Unternehmen erkannt – Ihre Registrierung wird zur Freigabe eingereicht.
         </p>
       )}
