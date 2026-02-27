@@ -199,7 +199,7 @@ const Forecast = () => {
 
   if (isLoading) {
     return (
-      <MainLayout title="Prognosen & Nachbestellung" subtitle="Demand Intelligence">
+      <MainLayout title="Prognosen & Nachbestellung" subtitle="Demand Intelligence" breadcrumbs={[{ label: 'Intelligence', href: '/abc-analysis' }, { label: 'Prognosen' }]}>
         <div className="space-y-6">
           <Skeleton className="h-32 w-full" />
           <div className="grid grid-cols-4 gap-4">
@@ -214,7 +214,7 @@ const Forecast = () => {
   }
 
   return (
-    <MainLayout title="Prognosen & Nachbestellung" subtitle="Demand Intelligence">
+    <MainLayout title="Prognosen & Nachbestellung" subtitle="Demand Intelligence" breadcrumbs={[{ label: 'Intelligence', href: '/abc-analysis' }, { label: 'Prognosen' }]}>
       <div className="space-y-6">
         {/* Seasonal Trends Analytics Widget */}
         <SeasonalTrendsWidget />

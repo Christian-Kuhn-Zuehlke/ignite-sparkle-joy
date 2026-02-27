@@ -188,7 +188,7 @@ const ClarificationCases = () => {
 
   if (isLoading) {
     return (
-      <MainLayout title="Klärfälle" subtitle="Problemfälle & Exceptions">
+      <MainLayout title="Klärfälle" subtitle="Problemfälle & Exceptions" breadcrumbs={[{ label: 'Klärfälle' }]}>
         <div className="space-y-6">
           <Skeleton className="h-32 w-full" />
           <div className="grid grid-cols-4 gap-4">
@@ -203,7 +203,7 @@ const ClarificationCases = () => {
   }
 
   return (
-    <MainLayout title="Klärfälle" subtitle="Problemfälle & Exceptions">
+    <MainLayout title="Klärfälle" subtitle="Problemfälle & Exceptions" breadcrumbs={[{ label: 'Klärfälle' }]}>
       <div className="space-y-6">
         {/* Header */}
         <Card className="border-orange-500/20 bg-gradient-to-r from-orange-500/5 to-transparent">

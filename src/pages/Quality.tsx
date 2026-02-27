@@ -46,6 +46,7 @@ export default function Quality() {
       <MainLayout 
         title="Quality Intelligence" 
         subtitle="Fehler-Transparenz und Root-Cause-Analyse"
+        breadcrumbs={[{ label: 'Quality Intelligence' }]}
       >
         <div className="grid gap-4 md:grid-cols-4">
           {[...Array(4)].map((_, i) => (
@@ -64,6 +65,7 @@ export default function Quality() {
     <MainLayout 
       title="Quality Intelligence" 
       subtitle="Fehler-Transparenz, Root-Cause-Analyse und Qualitäts-Scores"
+      breadcrumbs={[{ label: 'Quality Intelligence' }]}
     >
       {/* Header Actions */}
       <div className="flex items-center justify-between mb-6">

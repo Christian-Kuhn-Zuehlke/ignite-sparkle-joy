@@ -16,7 +16,6 @@ import { OrderNotes } from '@/components/orders/OrderNotes';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { Breadcrumbs } from '@/components/ui/breadcrumbs';
 import { SkeletonCard, SkeletonTable } from '@/components/ui/skeleton-card';
 import { fetchOrderById, getStatusColor, getStatusLabel, Order } from '@/services/dataService';
 import { toast } from 'sonner';
@@ -70,14 +69,7 @@ export default function OrderDetail() {
 
   if (loading) {
     return (
-      <MainLayout title={t('common.loading')} subtitle="">
-        <Breadcrumbs 
-          items={[
-            { label: t('nav.orders'), href: '/orders' },
-            { label: t('common.loading') }
-          ]} 
-          className="mb-6"
-        />
+      <MainLayout title={t('common.loading')} subtitle="" breadcrumbs={[{ label: t('nav.orders'), href: '/orders' }, { label: t('common.loading') }]}>
         <div className="grid gap-6 lg:grid-cols-3">
           <div className="lg:col-span-2 space-y-6">
             <SkeletonCard />
@@ -94,7 +86,7 @@ export default function OrderDetail() {
 
   if (!order) {
     return (
-      <MainLayout title={t('orders.notFound')} subtitle="">
+      <MainLayout title={t('orders.notFound')} subtitle="" breadcrumbs={[{ label: t('nav.orders'), href: '/orders' }, { label: t('orders.notFound') }]}>
         <div className="flex flex-col items-center justify-center py-16">
           <Package className="h-12 w-12 text-muted-foreground mb-4" />
           <p className="text-muted-foreground">{t('orders.orderNotFound')}</p>
@@ -122,15 +114,8 @@ export default function OrderDetail() {
     <MainLayout 
       title={`${t('orders.order')} #${order.source_no}`} 
       subtitle={`${order.company_name} • ${new Date(order.order_date).toLocaleDateString('de-CH')}`}
+      breadcrumbs={[{ label: t('nav.orders'), href: '/orders' }, { label: `#${order.source_no}` }]}
     >
-      {/* Breadcrumb Navigation */}
-      <Breadcrumbs 
-        items={[
-          { label: t('nav.orders'), href: '/orders' },
-          { label: `#${order.source_no}` }
-        ]} 
-        className="mb-6"
-      />
 
       {/* Main Grid - Stack on mobile */}
       <div className="grid gap-4 md:gap-6 lg:grid-cols-3">

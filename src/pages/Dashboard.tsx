@@ -60,7 +60,7 @@ export default function Dashboard() {
   // Error handling
   if (error) {
     return (
-      <MainLayout title="Dashboard" subtitle={t('dashboard.overview')}>
+      <MainLayout title="Dashboard" subtitle={t('dashboard.overview')} breadcrumbs={[{ label: 'Dashboard' }]}>
         <div className="flex items-center justify-center py-16">
           <div className="text-center">
             <p className="text-destructive mb-4">
@@ -99,7 +99,7 @@ export default function Dashboard() {
   // Loading state with skeleton
   if (isLoading && !metrics) {
     return (
-      <MainLayout title="Dashboard" subtitle={t('dashboard.overview')}>
+      <MainLayout title="Dashboard" subtitle={t('dashboard.overview')} breadcrumbs={[{ label: 'Dashboard' }]}>
         <div className="mb-6">
           <div className="h-12 w-64 rounded bg-muted animate-shimmer mb-6" />
         </div>
@@ -121,7 +121,7 @@ export default function Dashboard() {
   }
 
   return (
-    <MainLayout title="Dashboard" subtitle={t('dashboard.overview')}>
+    <MainLayout title="Dashboard" subtitle={t('dashboard.overview')} breadcrumbs={[{ label: 'Dashboard' }]}>
       {/* Personalized Greeting */}
       <PersonalizedGreeting />
 

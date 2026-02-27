@@ -265,7 +265,7 @@ export default function Orders() {
   }, []);
 
   return (
-    <MainLayout title={t('nav.orders')} subtitle={t('orders.subtitle')}>
+    <MainLayout title={t('nav.orders')} subtitle={t('orders.subtitle')} breadcrumbs={[{ label: t('nav.orders') }]}>
       {/* Shipping & Carrier Analytics Widgets */}
       <div className="mb-4 md:mb-6 grid gap-4 grid-cols-1 lg:grid-cols-2">
         <ShippingTimeWidget />
