@@ -15,7 +15,7 @@ export default function Packaging() {
   const [days, setDays] = useState(30);
 
   return (
-    <MainLayout title={t('packaging.title')} subtitle={t('packaging.subtitle')}>
+    <MainLayout title={t('packaging.title')} subtitle={t('packaging.subtitle')} breadcrumbs={[{ label: t('packaging.title') }]}>
       <div className="space-y-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">

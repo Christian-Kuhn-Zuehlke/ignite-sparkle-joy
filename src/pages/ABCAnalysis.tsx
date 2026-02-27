@@ -308,7 +308,7 @@ const ABCAnalysis = () => {
 
   if (isLoading) {
     return (
-      <MainLayout title="ABC-Analyse" subtitle="Artikel-Klassifizierung & Empfehlungen">
+      <MainLayout title="ABC-Analyse" subtitle="Artikel-Klassifizierung & Empfehlungen" breadcrumbs={[{ label: 'Intelligence', href: '/abc-analysis' }, { label: 'ABC-Analyse' }]}>
         <div className="space-y-6">
           <Skeleton className="h-32 w-full" />
           <div className="grid grid-cols-3 gap-4">
@@ -322,7 +322,7 @@ const ABCAnalysis = () => {
   }
 
   return (
-    <MainLayout title="ABC-Analyse" subtitle="Artikel-Klassifizierung & Empfehlungen">
+    <MainLayout title="ABC-Analyse" subtitle="Artikel-Klassifizierung & Empfehlungen" breadcrumbs={[{ label: 'Intelligence', href: '/abc-analysis' }, { label: 'ABC-Analyse' }]}>
       <div className="space-y-6">
         {/* Header with AI Summary */}
         <Card className="border-accent/20 bg-gradient-to-r from-accent/5 to-transparent">

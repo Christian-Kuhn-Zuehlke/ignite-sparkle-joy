@@ -18,7 +18,7 @@ export default function Inbound() {
   const canCreate = hasRole('admin') || hasRole('msd_ops') || hasRole('system_admin');
 
   return (
-    <MainLayout title={t('inbound.title')} subtitle={t('inbound.subtitle')}>
+    <MainLayout title={t('inbound.title')} subtitle={t('inbound.subtitle')} breadcrumbs={[{ label: t('inbound.title') }]}>
       <div className="space-y-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>

@@ -3,7 +3,7 @@ import { PalettePreviewDual } from '@/components/settings/PalettePreview';
 
 export default function PaletteDemo() {
   return (
-    <MainLayout title="Branding Paletten" subtitle="Vorschau aller kuratierten Industry-Paletten">
+    <MainLayout title="Branding Paletten" subtitle="Vorschau aller kuratierten Industry-Paletten" breadcrumbs={[{ label: 'Branding Paletten' }]}>
       <PalettePreviewDual />
     </MainLayout>
   );

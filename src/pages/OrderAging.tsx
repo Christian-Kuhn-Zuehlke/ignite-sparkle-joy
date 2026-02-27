@@ -212,7 +212,7 @@ export default function OrderAging() {
 
   if (error) {
     return (
-      <MainLayout title={t('aging.title')} subtitle={t('aging.subtitle')}>
+      <MainLayout title={t('aging.title')} subtitle={t('aging.subtitle')} breadcrumbs={[{ label: 'Intelligence', href: '/abc-analysis' }, { label: t('aging.title') }]}>
         <div className="flex items-center justify-center p-8">
           <Card className="max-w-md">
             <CardContent className="pt-6">
@@ -231,6 +231,7 @@ export default function OrderAging() {
     <MainLayout 
       title={t('aging.title')} 
       subtitle={t('aging.subtitle')}
+      breadcrumbs={[{ label: 'Intelligence', href: '/abc-analysis' }, { label: t('aging.title') }]}
     >
       <div className="space-y-6">
         {/* Quick Stats */}

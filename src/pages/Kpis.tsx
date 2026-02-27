@@ -221,6 +221,7 @@ export default function Kpis() {
     <MainLayout 
       title={t('kpis.title')} 
       subtitle={t('kpis.subtitle')}
+      breadcrumbs={[{ label: 'Intelligence', href: '/abc-analysis' }, { label: t('kpis.title') }]}
     >
       {/* Filters */}
       <div className="mb-6 flex flex-wrap items-center gap-4">

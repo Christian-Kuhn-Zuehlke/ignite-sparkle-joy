@@ -178,7 +178,7 @@ export default function Returns() {
 
 
   return (
-    <MainLayout title={t('nav.returns')} subtitle={t('returns.subtitle')}>
+    <MainLayout title={t('nav.returns')} subtitle={t('returns.subtitle')} breadcrumbs={[{ label: t('nav.returns') }]}>
       {/* Return Rates Analytics Widget */}
       <div className="mb-4 md:mb-6">
         <ReturnRatesWidget />

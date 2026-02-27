@@ -278,7 +278,7 @@ export default function CustomerCockpit() {
   const isLoading = segmentationLoading || vipLoading || churnLoading;
 
   return (
-    <MainLayout title="Customer Cockpit" subtitle="Kundensegmentierung & Analyse">
+    <MainLayout title="Customer Cockpit" subtitle="Kundensegmentierung & Analyse" breadcrumbs={[{ label: 'Customer Cockpit' }]}>
       {/* Filters */}
       <div className="mb-6 flex items-center gap-3">
         <CompanyFilterDropdown />

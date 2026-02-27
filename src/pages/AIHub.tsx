@@ -106,6 +106,7 @@ export default function AIHub() {
     <MainLayout 
       title={t('nav.aiHub')} 
       subtitle={t('ai.subtitle')}
+      breadcrumbs={[{ label: t('nav.aiHub') }]}
     >
       {/* Company Filter */}
       <div className="mb-4 md:mb-6">

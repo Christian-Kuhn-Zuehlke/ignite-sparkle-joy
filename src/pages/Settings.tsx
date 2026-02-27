@@ -208,7 +208,7 @@ export default function Settings() {
   const showSimpleView = !canManageUsers && !isMsdStaff;
 
   return (
-    <MainLayout title={getPageTitle()} subtitle={getPageSubtitle()}>
+    <MainLayout title={getPageTitle()} subtitle={getPageSubtitle()} breadcrumbs={[{ label: t('nav.settings') }]}>
       {/* Company Info for Customer Admins */}
       {isCustomerAdmin && profile?.company_name && (
         <div className="mb-6 rounded-xl border border-accent/20 bg-accent/5 p-5">

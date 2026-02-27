@@ -208,6 +208,7 @@ export default function ExecutiveDashboard() {
     <MainLayout 
       title={t('executive.title')} 
       subtitle={t('executive.subtitle')}
+      breadcrumbs={[{ label: t('executive.title') }]}
     >
       {/* Filter Section */}
       <div className="mb-6 flex flex-wrap items-center gap-4">

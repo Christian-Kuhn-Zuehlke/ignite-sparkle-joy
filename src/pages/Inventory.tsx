@@ -405,7 +405,7 @@ export default function Inventory() {
   const endIndex = Math.min(currentPage * pageSize, totalItems);
 
   return (
-    <MainLayout title={t('nav.inventory')} subtitle={t('inventory.subtitle')}>
+    <MainLayout title={t('nav.inventory')} subtitle={t('inventory.subtitle')} breadcrumbs={[{ label: t('nav.inventory') }]}>
       {/* Inventory Turnover Analytics Widget */}
       <div className="mb-4 md:mb-6">
         <InventoryTurnoverWidget />

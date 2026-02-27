@@ -1,6 +1,7 @@
 import { ReactNode, useState, useRef } from 'react';
 import { Sidebar } from './Sidebar';
 import { Header } from './Header';
+import { PageHeader, BreadcrumbItem } from './PageHeader';
 import { MobileSidebar } from './MobileSidebar';
 import { ScrollToTop } from '@/components/ui/scroll-to-top';
 import { KeyboardShortcutsModal } from './KeyboardShortcutsModal';
@@ -13,9 +14,11 @@ interface MainLayoutProps {
   children: ReactNode;
   title: string;
   subtitle?: string;
+  breadcrumbs?: BreadcrumbItem[];
+  actions?: ReactNode;
 }
 
-export function MainLayout({ children, title, subtitle }: MainLayoutProps) {
+export function MainLayout({ children, title, subtitle, breadcrumbs, actions }: MainLayoutProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showTour, setShowTour] = useState(false);
   const mainRef = useRef<HTMLElement>(null);
@@ -23,7 +26,7 @@ export function MainLayout({ children, title, subtitle }: MainLayoutProps) {
 
   return (
     <div className="flex h-screen overflow-hidden bg-background">
-      {/* Desktop Sidebar - hidden on mobile via CSS */}
+      {/* Desktop Sidebar */}
       <div className="hidden md:flex md:shrink-0">
         <Sidebar />
       </div>
@@ -32,7 +35,7 @@ export function MainLayout({ children, title, subtitle }: MainLayoutProps) {
       <MobileSidebar open={mobileMenuOpen} onOpenChange={setMobileMenuOpen} />
       
       <div className="flex flex-1 flex-col overflow-hidden">
-        {/* Demo Banner for pending users */}
+        {/* Demo Banner */}
         {isDemo && (
           <DemoBanner 
             message={message} 
@@ -40,27 +43,29 @@ export function MainLayout({ children, title, subtitle }: MainLayoutProps) {
           />
         )}
         
-        <Header 
+        {/* Header — thin app bar */}
+        <Header onMenuClick={() => setMobileMenuOpen(true)} />
+        
+        {/* Page Header — breadcrumbs + title */}
+        <PageHeader 
           title={title} 
           subtitle={subtitle} 
-          onMenuClick={() => setMobileMenuOpen(true)}
+          breadcrumbs={breadcrumbs}
+          actions={actions}
         />
+        
+        {/* Content */}
         <main ref={mainRef} className="flex-1 overflow-auto p-4 md:p-6">
           {children}
         </main>
       </div>
       
-      {/* Scroll to top button */}
       <ScrollToTop threshold={400} />
-      
-      {/* Keyboard shortcuts help modal */}
       <KeyboardShortcutsModal />
-      
-      {/* Offline indicator */}
       <OfflineIndicator />
-      
-      {/* Feature tour for demo mode */}
       <FeatureTour isOpen={showTour} onClose={() => setShowTour(false)} />
     </div>
   );
 }
+
+export type { BreadcrumbItem };
